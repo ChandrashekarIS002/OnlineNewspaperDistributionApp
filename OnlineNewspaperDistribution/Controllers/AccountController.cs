@@ -36,7 +36,7 @@ namespace OnlineNewspaperDistribution.Controllers
             {
                 if (!objNewspaperEntities1.UserMasters.Any(model => model.EmailId == objUserLoginViewModel.EmailId))
                 {
-                    ModelState.AddModelError("Error", objUserLoginViewModel.EmailId + "is Already Exists.");
+                    ModelState.AddModelError("Error", objUserLoginViewModel.EmailId + "is does not Exists.");
                     return View();
 
                 }
@@ -46,6 +46,9 @@ namespace OnlineNewspaperDistribution.Controllers
                 if(objuserMaster.Password==
                         objPbkdf2.Compute(objUserLoginViewModel.Password,objuserMaster.UserSalt))
                     {
+                        string UserTypeName = objNewspaperEntities1.UserTypeMasters.Single(UserType => UserType.UserTypeID == objuserMaster.UserTypeId).UserTypeName;
+                        Session["LoggedUserTypeId"] = objuserMaster.UserTypeId;
+                        Session["LoggedUserTypeName"] =UserTypeName;
                         AddFormAuthentication(objUserLoginViewModel.EmailId);
                         return RedirectToAction("Index", "Home");
                     }
@@ -59,10 +62,49 @@ namespace OnlineNewspaperDistribution.Controllers
             }
             return View();
         }
+        [HttpGet]
+        // [ValidateAntiForgeryToken]
 
-       [HttpGet]
-      // [ValidateAntiForgeryToken]
-       public ActionResult Register()
+        //Registration
+        public ActionResult RegisterAsAdmin()
+        {
+            //write linq to find usertypeid using "Admin" and assign the value to tempdata
+            TempData["UserTypeId"] = 1;
+            return View();
+        }
+
+        [HttpGet]
+        // [ValidateAntiForgeryToken]
+
+        //Registration
+        public ActionResult RegisterAsVendor()
+        {
+            //write linq to find usertypeid using "Vendor" and assign the value to tempdata
+            TempData["UserTypeId"] = 2;
+            return View();
+        }
+        [HttpGet]
+        // [ValidateAntiForgeryToken]
+
+        //Registration
+        public ActionResult RegisterAsCustomer()
+        {
+            //write linq to find usertypeid using "Customer" and assign the value to tempdata
+            TempData["UserTypeId"] = 4;
+            return View();
+        }
+        [HttpGet]
+        // [ValidateAntiForgeryToken]
+
+        //Registration
+        public ActionResult RegisterAsDeliveryBoy()
+        {
+            //write linq to find usertypeid using "Delivery Boy" and assign the value to tempdata
+            TempData["UserTypeId"] = 3;
+            return View();
+        }
+
+        public ActionResult Register()
         {
             return View();
         }
@@ -86,6 +128,8 @@ namespace OnlineNewspaperDistribution.Controllers
                     //objuserMaster.UserId = Guid.NewGuid();
                     objuserMaster.UserName = objRegisterViewModel.UserName;
                     objuserMaster.EmailId = objRegisterViewModel.EmailId;
+                    objuserMaster.UserTypeId = (int)TempData["UserTypeId"];
+                    TempData.Keep("UserTypeId");
 
                     objuserMaster.UserSalt = UserSalt;
                     objuserMaster.Password = objPbkdf2.Compute(objRegisterViewModel.Password, UserSalt);
@@ -93,6 +137,7 @@ namespace OnlineNewspaperDistribution.Controllers
                     objNewspaperEntities1.SaveChanges();
                     AddFormAuthentication(objRegisterViewModel.UserName);
                     return RedirectToAction("Index", "Home");
+
                 }
             }
             return View();

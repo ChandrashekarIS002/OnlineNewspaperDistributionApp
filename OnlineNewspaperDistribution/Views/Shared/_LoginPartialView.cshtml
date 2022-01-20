@@ -1,6 +1,21 @@
 ﻿@if (User.Identity.IsAuthenticated)
 {
     <ul class="nav navbar-nav navbar-right">
+        @if (Session["LoggedUserTypeName"] != null)
+        {
+            if (Session["LoggedUserTypeName"].ToString() == "Admin")
+            {
+                <li>@Html.ActionLink("Admin LoggedIn", "Logout", "Account")</li>
+            }
+            if (Session["LoggedUserTypeName"].ToString() == "Vendor")
+            {
+                <li>@Html.ActionLink("Vendor LoggedIn", "Logout", "Account")</li>
+            }
+            if (Session["LoggedUserTypeName"].ToString() == "Customer")
+            {
+                <li>@Html.ActionLink("Customer LoggedIn", "Logout", "Account")</li>
+            }
+        }
         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
         <li>@Html.ActionLink(@User.Identity.Name, "", "")</li>
     </ul>
@@ -8,7 +23,8 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account")</li>
+        <li>@Html.ActionLink("Register As Vendor", "RegisterAsVendor", "Account")</li>
+        <li>@Html.ActionLink("Register As Customer", "RegisterAsCustomer", "Account")</li>
         <li>@Html.ActionLink("Login", "Index", "Account")</li>
     </ul>
 }
