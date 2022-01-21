@@ -62,56 +62,63 @@ namespace OnlineNewspaperDistribution.Controllers
             }
             return View();
         }
-        [HttpGet]
-        // [ValidateAntiForgeryToken]
 
-        //Registration
-        public ActionResult RegisterAsAdmin()
-        {
-            //write linq to find usertypeid using "Admin" and assign the value to tempdata
-            TempData["UserTypeId"] = 1;
-            return View();
-        }
+        // //Registration for Vendor
 
         [HttpGet]
         // [ValidateAntiForgeryToken]
-
-        //Registration
         public ActionResult RegisterAsVendor()
         {
             //write linq to find usertypeid using "Vendor" and assign the value to tempdata
             TempData["UserTypeId"] = 2;
             return View();
         }
+        [HttpPost]
+        public ActionResult RegisterAsVendor(RegisterViewModel objRegisterViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                if (objNewspaperEntities1.UserMasters.Any(model => model.UserName == objRegisterViewModel.UserName))
+                {
+                    ModelState.AddModelError("Error", objRegisterViewModel.UserName + "is Already Exists.");
+                    return View();
+
+                }
+                else
+                {
+                    string UserSalt = objPbkdf2.GenerateSalt();
+                    UserMaster objuserMaster = new UserMaster();
+                    //objuserMaster.UserId = Guid.NewGuid();
+                    objuserMaster.UserName = objRegisterViewModel.UserName;
+                    objuserMaster.EmailId = objRegisterViewModel.EmailId;
+                    objuserMaster.UserTypeId = (int)TempData["UserTypeId"];
+                    TempData.Keep("UserTypeId");
+
+                    objuserMaster.UserSalt = UserSalt;
+                    objuserMaster.Password = objPbkdf2.Compute(objRegisterViewModel.Password, UserSalt);
+                    objNewspaperEntities1.UserMasters.Add(objuserMaster);
+                    objNewspaperEntities1.SaveChanges();
+                    AddFormAuthentication(objRegisterViewModel.UserName);
+                    return RedirectToAction("Index", "Home");
+
+                }
+            }
+            return View();
+        }
+
+        // //Registration for Customer
+
         [HttpGet]
         // [ValidateAntiForgeryToken]
-
-        //Registration
         public ActionResult RegisterAsCustomer()
         {
             //write linq to find usertypeid using "Customer" and assign the value to tempdata
             TempData["UserTypeId"] = 4;
             return View();
         }
-        [HttpGet]
-        // [ValidateAntiForgeryToken]
-
-        //Registration
-        public ActionResult RegisterAsDeliveryBoy()
-        {
-            //write linq to find usertypeid using "Delivery Boy" and assign the value to tempdata
-            TempData["UserTypeId"] = 3;
-            return View();
-        }
-
-        public ActionResult Register()
-        {
-            return View();
-        }
 
         [HttpPost]
-
-        public ActionResult Register(RegisterViewModel objRegisterViewModel)
+        public ActionResult RegisterAsCustomer(RegisterViewModel objRegisterViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -158,108 +165,5 @@ namespace OnlineNewspaperDistribution.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-            /* // GET: Account/Details/5
-             public ActionResult Details(int? id)
-             {
-                 if (id == null)
-                 {
-                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                 }
-                 UserMaster userMaster = db.UserMasters.Find(id);
-                 if (userMaster == null)
-                 {
-                     return HttpNotFound();
-                 }
-                 return View(userMaster);
-             }
-
-             // GET: Account/Create
-             public ActionResult Create()
-             {
-                 return View();
-             }
-
-             // POST: Account/Create
-             // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-             // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-             [HttpPost]
-             [ValidateAntiForgeryToken]
-             public ActionResult Create([Bind(Include = "UserId,UserName,EmailId,UserSalt,UserTypeId,Password,CreatedBy,CreatedDateTime,LastEditedBy,LastEditedDateTime")] UserMaster userMaster)
-             {
-                 if (ModelState.IsValid)
-                 {
-                     db.UserMasters.Add(userMaster);
-                     db.SaveChanges();
-                     return RedirectToAction("Index");
-                 }
-
-                 return View(userMaster);
-             }
-
-             // GET: Account/Edit/5
-             public ActionResult Edit(int? id)
-             {
-                 if (id == null)
-                 {
-                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                 }
-                 UserMaster userMaster = db.UserMasters.Find(id);
-                 if (userMaster == null)
-                 {
-                     return HttpNotFound();
-                 }
-                 return View(userMaster);
-             }
-
-             // POST: Account/Edit/5
-             // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-             // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-             [HttpPost]
-             [ValidateAntiForgeryToken]
-             public ActionResult Edit([Bind(Include = "UserId,UserName,EmailId,UserSalt,UserTypeId,Password,CreatedBy,CreatedDateTime,LastEditedBy,LastEditedDateTime")] UserMaster userMaster)
-             {
-                 if (ModelState.IsValid)
-                 {
-                     db.Entry(userMaster).State = EntityState.Modified;
-                     db.SaveChanges();
-                     return RedirectToAction("Index");
-                 }
-                 return View(userMaster);
-             }
-
-             // GET: Account/Delete/5
-             public ActionResult Delete(int? id)
-             {
-                 if (id == null)
-                 {
-                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                 }
-                 UserMaster userMaster = db.UserMasters.Find(id);
-                 if (userMaster == null)
-                 {
-                     return HttpNotFound();
-                 }
-                 return View(userMaster);
-             }
-
-             // POST: Account/Delete/5
-             [HttpPost, ActionName("Delete")]
-             [ValidateAntiForgeryToken]
-             public ActionResult DeleteConfirmed(int id)
-             {
-                 UserMaster userMaster = db.UserMasters.Find(id);
-                 db.UserMasters.Remove(userMaster);
-                 db.SaveChanges();
-                 return RedirectToAction("Index");
-             }
-
-             protected override void Dispose(bool disposing)
-             {
-                 if (disposing)
-                 {
-                     db.Dispose();
-                 }
-                 base.Dispose(disposing);
-             }*/
         }
     }

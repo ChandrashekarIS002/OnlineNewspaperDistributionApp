@@ -1,24 +1,33 @@
 ﻿@if (User.Identity.IsAuthenticated)
 {
-    <ul class="nav navbar-nav navbar-right">
-        @if (Session["LoggedUserTypeName"] != null)
+<ul class="nav navbar-nav navbar-right">
+    @if (Session["LoggedUserTypeName"] != null)
+    {
+        if (Session["LoggedUserTypeName"].ToString() == "Admin")
         {
-            if (Session["LoggedUserTypeName"].ToString() == "Admin")
-            {
-                <li>@Html.ActionLink("Admin LoggedIn", "Logout", "Account")</li>
-            }
-            if (Session["LoggedUserTypeName"].ToString() == "Vendor")
-            {
-                <li>@Html.ActionLink("Vendor LoggedIn", "Logout", "Account")</li>
-            }
-            if (Session["LoggedUserTypeName"].ToString() == "Customer")
-            {
-                <li>@Html.ActionLink("Customer LoggedIn", "Logout", "Account")</li>
-            }
+            <li>@Html.ActionLink("Add Newspaper", "Logout", "Account")</li>
+            <li>@Html.ActionLink("Manage Vendor", "Logout", "Account")</li>
+            <li>@Html.ActionLink("Bill Generation", "Logout", "Account")</li>
+            @*<li>@Html.ActionLink()</li>*@
+
+
+            <li>@Html.ActionLink("Admin LoggedIn", "Logout", "Account")</li>
+
         }
-        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
-        <li>@Html.ActionLink(@User.Identity.Name, "", "")</li>
-    </ul>
+        if (Session["LoggedUserTypeName"].ToString() == "Vendor")
+        {
+            <li>@Html.ActionLink("Add Delevery Boy", "Logout", "Account")</li>
+            <li>@Html.ActionLink("Subscribed Customer", "Vendor LoggedIn", "Logout", "Account")</li>
+            <li>@Html.ActionLink("View Bill", "Logout", "Account")</li>
+        }
+        if (Session["LoggedUserTypeName"].ToString() == "Customer")
+        {
+            <li>@Html.ActionLink("Customer LoggedIn", "Logout", "Account")</li>
+        }
+    }
+    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+    <li>@Html.ActionLink(@User.Identity.Name, "", "")</li>
+</ul>
 }
 else
 {
