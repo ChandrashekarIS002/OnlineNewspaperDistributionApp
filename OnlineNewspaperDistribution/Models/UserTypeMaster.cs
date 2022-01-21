@@ -14,7 +14,7 @@ namespace OnlineNewspaperDistribution.Models
     
     public partial class UserTypeMaster
     {
-        public int UserTypeID { get; set; }
+        public int UserTypeId { get; set; }
         public string UserTypeName { get; set; }
         public bool IsActive { get; set; }
         public int CreatedBy { get; set; }

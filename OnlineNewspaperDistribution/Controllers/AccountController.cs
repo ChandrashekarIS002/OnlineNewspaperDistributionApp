@@ -46,7 +46,7 @@ namespace OnlineNewspaperDistribution.Controllers
                 if(objuserMaster.Password==
                         objPbkdf2.Compute(objUserLoginViewModel.Password,objuserMaster.UserSalt))
                     {
-                        string UserTypeName = objNewspaperEntities1.UserTypeMasters.Single(UserType => UserType.UserTypeID == objuserMaster.UserTypeId).UserTypeName;
+                        string UserTypeName = objNewspaperEntities1.UserTypeMasters.Single(UserType => UserType.UserTypeId == objuserMaster.UserTypeId).UserTypeName;
                         Session["LoggedUserTypeId"] = objuserMaster.UserTypeId;
                         Session["LoggedUserTypeName"] =UserTypeName;
                         AddFormAuthentication(objUserLoginViewModel.EmailId);

@@ -102,9 +102,9 @@
         </EntityType>
         <EntityType Name="UserTypeMaster">
           <Key>
-            <PropertyRef Name="UserTypeID" />
+            <PropertyRef Name="UserTypeId" />
           </Key>
-          <Property Name="UserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserTypeName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
@@ -164,12 +164,12 @@
           <EntitySet Name="StreetMasters" EntityType="NewspaperModel.StreetMaster" />
           <EntitySet Name="SubscriptionDetails" EntityType="NewspaperModel.SubscriptionDetail" />
           <EntitySet Name="UseDetails" EntityType="NewspaperModel.UseDetail" />
-          <EntitySet Name="UserTypeMasters" EntityType="NewspaperModel.UserTypeMaster" />
           <AssociationSet Name="FK_SubscriptionDetails_SubscriptionDetails" Association="NewspaperModel.FK_SubscriptionDetails_SubscriptionDetails">
             <End Role="SubscriptionDetail" EntitySet="SubscriptionDetails" />
             <End Role="SubscriptionDetail1" EntitySet="SubscriptionDetails" />
           </AssociationSet>
           <EntitySet Name="NewspaperMaster1" EntityType="NewspaperModel.NewspaperMaster1" />
+          <EntitySet Name="UserTypeMasters" EntityType="NewspaperModel.UserTypeMaster" />
         </EntityContainer>
         <EntityType Name="BillDetail">
           <Key>
@@ -240,22 +240,6 @@
           <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
           <Property Name="LastEditedDateTIme" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="UserTypeMaster">
-          <Key>
-            <PropertyRef Name="UserTypeID" />
-            <PropertyRef Name="UserTypeName" />
-            <PropertyRef Name="IsActive" />
-            <PropertyRef Name="CreatedBy" />
-            <PropertyRef Name="LastEditedBy" />
-          </Key>
-          <Property Name="UserTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserTypeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastEditedDateTIme" Type="DateTime" Precision="3" />
-        </EntityType>
         <Association Name="FK_SubscriptionDetails_SubscriptionDetails">
           <End Type="NewspaperModel.SubscriptionDetail" Role="SubscriptionDetail" Multiplicity="1" />
           <End Type="NewspaperModel.SubscriptionDetail" Role="SubscriptionDetail1" Multiplicity="0..1" />
@@ -280,6 +264,18 @@
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
           <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
           <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserTypeMaster">
+          <Key>
+            <PropertyRef Name="UserTypeId" />
+          </Key>
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserTypeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastEditedDateTIme" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -375,19 +371,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserTypeMasters">
-            <EntityTypeMapping TypeName="NewspaperModel.UserTypeMaster">
-              <MappingFragment StoreEntitySet="UserTypeMaster">
-                <ScalarProperty Name="LastEditedDateTIme" ColumnName="LastEditedDateTIme" />
-                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UserTypeName" ColumnName="UserTypeName" />
-                <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="NewspaperMaster1">
             <EntityTypeMapping TypeName="NewspaperModel.NewspaperMaster1">
               <MappingFragment StoreEntitySet="NewspaperMaster">
@@ -399,6 +382,19 @@
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="NewspaperName" ColumnName="NewspaperName" />
                 <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypeMasters">
+            <EntityTypeMapping TypeName="NewspaperModel.UserTypeMaster">
+              <MappingFragment StoreEntitySet="UserTypeMaster">
+                <ScalarProperty Name="LastEditedDateTIme" ColumnName="LastEditedDateTIme" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UserTypeName" ColumnName="UserTypeName" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
