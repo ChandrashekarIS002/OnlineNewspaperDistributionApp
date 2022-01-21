@@ -28,10 +28,10 @@ namespace OnlineNewspaperDistribution.Models
         public virtual DbSet<UserMaster> UserMasters { get; set; }
         public virtual DbSet<BillDetail> BillDetails { get; set; }
         public virtual DbSet<BillMaster> BillMasters { get; set; }
-        public virtual DbSet<NewsPaperMaster> NewsPaperMasters { get; set; }
         public virtual DbSet<StreetMaster> StreetMasters { get; set; }
         public virtual DbSet<SubscriptionDetail> SubscriptionDetails { get; set; }
         public virtual DbSet<UseDetail> UseDetails { get; set; }
         public virtual DbSet<UserTypeMaster> UserTypeMasters { get; set; }
+        public virtual DbSet<NewspaperMaster1> NewspaperMaster1 { get; set; }
     }
 }

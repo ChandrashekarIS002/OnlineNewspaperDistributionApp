@@ -12,13 +12,12 @@ namespace OnlineNewspaperDistribution.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class NewsPaperMaster
+    public partial class NewspaperMaster1
     {
-        public int NewsPaperId { get; set; }
-        public string NewsPaperName { get; set; }
-        public string EmailId { get; set; }
+        public int NewspaperId { get; set; }
+        public string NewspaperName { get; set; }
         public bool IsActive { get; set; }
-        public decimal Rate { get; set; }
+        public decimal Price { get; set; }
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public int LastEditedBy { get; set; }

@@ -32,15 +32,14 @@
           <Property Name="LastEditedBy" Type="int" Nullable="false" />
           <Property Name="LastEditedDateTime" Type="datetime" />
         </EntityType>
-        <EntityType Name="NewsPaperMaster">
+        <EntityType Name="NewspaperMaster">
           <Key>
-            <PropertyRef Name="NewsPaperId" />
+            <PropertyRef Name="NewspaperId" />
           </Key>
-          <Property Name="NewsPaperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NewsPaperName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="EmailId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NewspaperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewspaperName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="Rate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Price" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="LastEditedBy" Type="int" Nullable="false" />
@@ -101,15 +100,9 @@
           <Property Name="LastEditedBy" Type="int" Nullable="false" />
           <Property Name="LastEditedDateTime" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Newspaper.dbo.UserTypeMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserTypeMaster">
           <Key>
             <PropertyRef Name="UserTypeID" />
-            <PropertyRef Name="UserTypeName" />
-            <PropertyRef Name="IsActive" />
-            <PropertyRef Name="CreatedBy" />
-            <PropertyRef Name="LastEditedBy" />
           </Key>
           <Property Name="UserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserTypeName" Type="nvarchar(max)" Nullable="false" />
@@ -134,22 +127,12 @@ warning 6002: The table/view 'Newspaper.dbo.UserTypeMaster' does not have a prim
         <EntityContainer Name="NewspaperModelStoreContainer">
           <EntitySet Name="BillDetails" EntityType="Self.BillDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BillMaster" EntityType="Self.BillMaster" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NewsPaperMaster" EntityType="Self.NewsPaperMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewspaperMaster" EntityType="Self.NewspaperMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StreetMaster" EntityType="Self.StreetMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubscriptionDetails" EntityType="Self.SubscriptionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UseDetails" EntityType="Self.UseDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserTypeMaster" EntityType="Self.UserTypeMaster" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserTypeMaster].[UserTypeID] AS [UserTypeID], 
-    [UserTypeMaster].[UserTypeName] AS [UserTypeName], 
-    [UserTypeMaster].[IsActive] AS [IsActive], 
-    [UserTypeMaster].[CreatedBy] AS [CreatedBy], 
-    [UserTypeMaster].[CreatedDateTime] AS [CreatedDateTime], 
-    [UserTypeMaster].[LastEditedBy] AS [LastEditedBy], 
-    [UserTypeMaster].[LastEditedDateTIme] AS [LastEditedDateTIme]
-    FROM [dbo].[UserTypeMaster] AS [UserTypeMaster]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="UserTypeMaster" EntityType="Self.UserTypeMaster" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_SubscriptionDetails_SubscriptionDetails" Association="Self.FK_SubscriptionDetails_SubscriptionDetails">
             <End Role="SubscriptionDetails" EntitySet="SubscriptionDetails" />
             <End Role="SubscriptionDetails1" EntitySet="SubscriptionDetails" />
@@ -178,7 +161,6 @@ warning 6002: The table/view 'Newspaper.dbo.UserTypeMaster' does not have a prim
           <EntitySet Name="UserMasters" EntityType="Self.UserMaster" />
           <EntitySet Name="BillDetails" EntityType="NewspaperModel.BillDetail" />
           <EntitySet Name="BillMasters" EntityType="NewspaperModel.BillMaster" />
-          <EntitySet Name="NewsPaperMasters" EntityType="NewspaperModel.NewsPaperMaster" />
           <EntitySet Name="StreetMasters" EntityType="NewspaperModel.StreetMaster" />
           <EntitySet Name="SubscriptionDetails" EntityType="NewspaperModel.SubscriptionDetail" />
           <EntitySet Name="UseDetails" EntityType="NewspaperModel.UseDetail" />
@@ -187,6 +169,7 @@ warning 6002: The table/view 'Newspaper.dbo.UserTypeMaster' does not have a prim
             <End Role="SubscriptionDetail" EntitySet="SubscriptionDetails" />
             <End Role="SubscriptionDetail1" EntitySet="SubscriptionDetails" />
           </AssociationSet>
+          <EntitySet Name="NewspaperMaster1" EntityType="NewspaperModel.NewspaperMaster1" />
         </EntityContainer>
         <EntityType Name="BillDetail">
           <Key>
@@ -210,20 +193,6 @@ warning 6002: The table/view 'Newspaper.dbo.UserTypeMaster' does not have a prim
           <Property Name="BillId" Type="Int32" Nullable="false" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="NewsPaperMaster">
-          <Key>
-            <PropertyRef Name="NewsPaperId" />
-          </Key>
-          <Property Name="NewsPaperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NewsPaperName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EmailId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
           <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
@@ -299,6 +268,19 @@ warning 6002: The table/view 'Newspaper.dbo.UserTypeMaster' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="NewspaperMaster1">
+          <Key>
+            <PropertyRef Name="NewspaperId" />
+          </Key>
+          <Property Name="NewspaperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewspaperName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -347,21 +329,6 @@ warning 6002: The table/view 'Newspaper.dbo.UserTypeMaster' does not have a prim
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="BillId" ColumnName="BillId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NewsPaperMasters">
-            <EntityTypeMapping TypeName="NewspaperModel.NewsPaperMaster">
-              <MappingFragment StoreEntitySet="NewsPaperMaster">
-                <ScalarProperty Name="LastEditedDateTime" ColumnName="LastEditedDateTime" />
-                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
-                <ScalarProperty Name="NewsPaperName" ColumnName="NewsPaperName" />
-                <ScalarProperty Name="NewsPaperId" ColumnName="NewsPaperId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -418,6 +385,20 @@ warning 6002: The table/view 'Newspaper.dbo.UserTypeMaster' does not have a prim
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="UserTypeName" ColumnName="UserTypeName" />
                 <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewspaperMaster1">
+            <EntityTypeMapping TypeName="NewspaperModel.NewspaperMaster1">
+              <MappingFragment StoreEntitySet="NewspaperMaster">
+                <ScalarProperty Name="LastEditedDateTime" ColumnName="LastEditedDateTime" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="NewspaperName" ColumnName="NewspaperName" />
+                <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

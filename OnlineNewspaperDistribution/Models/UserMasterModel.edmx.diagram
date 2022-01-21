@@ -8,12 +8,12 @@
         <EntityTypeShape EntityType="NewspaperModel.UserMaster" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NewspaperModel.BillDetail" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="NewspaperModel.BillMaster" Width="1.5" PointX="2.75" PointY="4.75" />
-        <EntityTypeShape EntityType="NewspaperModel.NewsPaperMaster" Width="1.5" PointX="4.75" PointY="4.75" />
         <EntityTypeShape EntityType="NewspaperModel.StreetMaster" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="NewspaperModel.SubscriptionDetail" Width="1.5" PointX="3.75" PointY="0.75" />
         <EntityTypeShape EntityType="NewspaperModel.UseDetail" Width="1.5" PointX="6.75" PointY="3.75" />
-        <EntityTypeShape EntityType="NewspaperModel.UserTypeMaster" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="NewspaperModel.UserTypeMaster" Width="1.5" PointX="8.625" PointY="4" />
         <AssociationConnector Association="NewspaperModel.FK_SubscriptionDetails_SubscriptionDetails" />
+        <EntityTypeShape EntityType="NewspaperModel.NewspaperMaster1" Width="1.5" PointX="4.75" PointY="5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
