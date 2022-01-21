@@ -242,6 +242,15 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\RegisterAsCustomer.cshtml" />
     <Content Include="Views\Account\RegisterAsVendor.cshtml" />
+    <Content Include="Views\Account\CustomerNewspaper.cshtml" />
+    <Content Include="Views\Account\CustomerSubscription.cshtml" />
+    <Content Include="Views\Account\CustomerFeedback.cshtml" />
+    <Content Include="Views\Account\VendorDeliveryBoy.cshtml" />
+    <Content Include="Views\Account\VendorCustomerSubscription.cshtml" />
+    <Content Include="Views\Account\VendorViewBill.cshtml" />
+    <Content Include="Views\Account\AdminBillGeneration.cshtml" />
+    <Content Include="Views\Account\AdminManageVendor.cshtml" />
+    <Content Include="Views\Account\AdminAddNewspaper.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

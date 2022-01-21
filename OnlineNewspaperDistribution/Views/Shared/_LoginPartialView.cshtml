@@ -5,9 +5,9 @@
     {
         if (Session["LoggedUserTypeName"].ToString() == "Admin")
         {
-            <li>@Html.ActionLink("Add Newspaper", "Logout", "Account")</li>
-            <li>@Html.ActionLink("Manage Vendor", "Logout", "Account")</li>
-            <li>@Html.ActionLink("Bill Generation", "Logout", "Account")</li>
+            <li>@Html.ActionLink("Add Newspaper", "AdminAddNewspaper", "Account")</li>
+            <li>@Html.ActionLink("Manage Vendor", "AdminManageVendor", "Account")</li>
+            <li>@Html.ActionLink("Bill Generation", "AdminBillGeneration", "Account")</li>
             @*<li>@Html.ActionLink()</li>*@
 
 
@@ -16,12 +16,16 @@
         }
         if (Session["LoggedUserTypeName"].ToString() == "Vendor")
         {
-            <li>@Html.ActionLink("Add Delevery Boy", "Logout", "Account")</li>
-            <li>@Html.ActionLink("Subscribed Customer", "Vendor LoggedIn", "Logout", "Account")</li>
-            <li>@Html.ActionLink("View Bill", "Logout", "Account")</li>
+            <li>@Html.ActionLink("Add Delevery Boy", "VendorDeliveryBoy", "Account")</li>
+            <li>@Html.ActionLink("Subscribed Customer", "VendorCustomerSubscription", "Account")</li>
+            <li>@Html.ActionLink("View Bill", "VendorViewBill", "Account")</li>
+            <li>@Html.ActionLink("Vendor LoggedIn", "Logout", "Account")</li>
         }
         if (Session["LoggedUserTypeName"].ToString() == "Customer")
         {
+            <li>@Html.ActionLink("View Newspaper", "CustomerNewspaper", "Account")</li>
+            <li>@Html.ActionLink("View Subscription", "CustomerSubscription", "Account")</li>
+            <li>@Html.ActionLink("Give Feedback", "CustomerFeedback", "Account")</li>
             <li>@Html.ActionLink("Customer LoggedIn", "Logout", "Account")</li>
         }
     }

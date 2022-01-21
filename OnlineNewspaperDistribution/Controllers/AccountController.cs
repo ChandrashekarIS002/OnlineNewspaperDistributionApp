@@ -165,5 +165,54 @@ namespace OnlineNewspaperDistribution.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        //Admins menus
+
+        public ActionResult AdminAddNewspaper()
+        {
+            return View();
         }
+
+        public ActionResult AdminManageVendor()
+        {
+            return View();
+        }
+
+        public ActionResult AdminBillGeneration()
+        {
+            return View();
+        }
+
+        //Customers menus
+        public ActionResult CustomerNewspaper()
+        {
+            return View();
+        }
+
+        public ActionResult CustomerSubscription()
+        {
+            return View();
+        }
+
+        public ActionResult CustomerFeedback()
+        {
+            return View();
+        }
+
+        //vendor menus
+
+        public ActionResult VendorDeliveryBoy()
+        {
+            return View();
+        }
+
+        public ActionResult VendorCustomerSubscription()
+        {
+            return View();
+        }
+
+        public ActionResult VendorViewBill()
+        {
+            return View();
+        }
+    }
     }
