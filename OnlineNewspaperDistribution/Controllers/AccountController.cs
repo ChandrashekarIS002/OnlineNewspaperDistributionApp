@@ -45,12 +45,8 @@ namespace OnlineNewspaperDistribution.Controllers
                     var objuserMaster = objNewspaperEntities1.UserMasters.Single(model => model.EmailId == objUserLoginViewModel.EmailId);
                 if(objuserMaster.Password==
                         objPbkdf2.Compute(objUserLoginViewModel.Password,objuserMaster.UserSalt))
-                    {
-                        string UserTypeName = objNewspaperEntities1.UserTypeMasters.Single(UserType => UserType.UserTypeId == objuserMaster.UserTypeId).UserTypeName;
-                        Session["LoggedUserTypeId"] = objuserMaster.UserTypeId;
-                        Session["LoggedUserTypeName"] =UserTypeName;
-                        AddFormAuthentication(objUserLoginViewModel.EmailId);
-                        return RedirectToAction("Index", "Home");
+                    { 
+                        return LoginUser(objuserMaster);
                     }
                     else
                     {
@@ -62,7 +58,20 @@ namespace OnlineNewspaperDistribution.Controllers
             }
             return View();
         }
+        [HttpGet]
+        // [ValidateAntiForgeryToken]
+        public ActionResult RegisterAsAdmin()
+        {
+            //write linq to find usertypeid using "Vendor" and assign the value to tempdata
+            TempData["UserTypeId"] = 1;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult RegisterAsAdmin(RegisterViewModel objRegisterViewModel)
+        {
+            return RegisterUser(objRegisterViewModel);
 
+        }
         // //Registration for Vendor
 
         [HttpGet]
@@ -76,36 +85,9 @@ namespace OnlineNewspaperDistribution.Controllers
         [HttpPost]
         public ActionResult RegisterAsVendor(RegisterViewModel objRegisterViewModel)
         {
-            if (ModelState.IsValid)
-            {
-                if (objNewspaperEntities1.UserMasters.Any(model => model.UserName == objRegisterViewModel.UserName))
-                {
-                    ModelState.AddModelError("Error", objRegisterViewModel.UserName + "is Already Exists.");
-                    return View();
-
-                }
-                else
-                {
-                    string UserSalt = objPbkdf2.GenerateSalt();
-                    UserMaster objuserMaster = new UserMaster();
-                    //objuserMaster.UserId = Guid.NewGuid();
-                    objuserMaster.UserName = objRegisterViewModel.UserName;
-                    objuserMaster.EmailId = objRegisterViewModel.EmailId;
-                    objuserMaster.UserTypeId = (int)TempData["UserTypeId"];
-                    TempData.Keep("UserTypeId");
-
-                    objuserMaster.UserSalt = UserSalt;
-                    objuserMaster.Password = objPbkdf2.Compute(objRegisterViewModel.Password, UserSalt);
-                    objNewspaperEntities1.UserMasters.Add(objuserMaster);
-                    objNewspaperEntities1.SaveChanges();
-                    AddFormAuthentication(objRegisterViewModel.UserName);
-                    return RedirectToAction("Index", "Home");
-
-                }
-            }
-            return View();
+            return RegisterUser(objRegisterViewModel);
+            
         }
-
         // //Registration for Customer
 
         [HttpGet]
@@ -120,6 +102,11 @@ namespace OnlineNewspaperDistribution.Controllers
         [HttpPost]
         public ActionResult RegisterAsCustomer(RegisterViewModel objRegisterViewModel)
         {
+            return RegisterUser(objRegisterViewModel);
+        }
+
+       public ActionResult RegisterUser(RegisterViewModel objRegisterViewModel, bool CanUserLogin = true)
+        {
             if (ModelState.IsValid)
             {
                 if (objNewspaperEntities1.UserMasters.Any(model => model.UserName == objRegisterViewModel.UserName))
@@ -137,19 +124,30 @@ namespace OnlineNewspaperDistribution.Controllers
                     objuserMaster.EmailId = objRegisterViewModel.EmailId;
                     objuserMaster.UserTypeId = (int)TempData["UserTypeId"];
                     TempData.Keep("UserTypeId");
+                    if (CanUserLogin)
+                    {
+                        objuserMaster.UserSalt = UserSalt;
+                        objuserMaster.Password = objPbkdf2.Compute(objRegisterViewModel.Password, UserSalt);
+                        objNewspaperEntities1.UserMasters.Add(objuserMaster);
+                        objNewspaperEntities1.SaveChanges();
+                        return LoginUser(objuserMaster);
 
-                    objuserMaster.UserSalt = UserSalt;
-                    objuserMaster.Password = objPbkdf2.Compute(objRegisterViewModel.Password, UserSalt);
-                    objNewspaperEntities1.UserMasters.Add(objuserMaster);
-                    objNewspaperEntities1.SaveChanges();
-                    AddFormAuthentication(objRegisterViewModel.UserName);
-                    return RedirectToAction("Index", "Home");
-
+                    }
+                    
                 }
             }
-            return View();
-        }
+            return View("Index");
 
+        }
+        public ActionResult LoginUser(UserMaster objuserMaster)
+        {
+            string UserTypeName = objNewspaperEntities1.UserTypeMasters.Single(UserType => UserType.UserTypeId == objuserMaster.UserTypeId).UserTypeName;
+            Session["LoggedUserTypeId"] = objuserMaster.UserTypeId;
+            Session["LoggedUserTypeName"] = UserTypeName;
+            AddFormAuthentication(objuserMaster.EmailId);
+            return RedirectToAction("Index", "Home");
+
+        }
         private void AddFormAuthentication(string UserName)
         {
             FormsAuthentication.SetAuthCookie(UserName, false);

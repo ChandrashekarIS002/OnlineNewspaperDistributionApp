@@ -251,6 +251,7 @@
     <Content Include="Views\Account\AdminBillGeneration.cshtml" />
     <Content Include="Views\Account\AdminManageVendor.cshtml" />
     <Content Include="Views\Account\AdminAddNewspaper.cshtml" />
+    <Content Include="Views\Account\RegisterAsAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

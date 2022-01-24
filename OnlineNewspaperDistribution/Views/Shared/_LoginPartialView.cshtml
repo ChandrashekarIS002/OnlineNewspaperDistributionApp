@@ -5,12 +5,11 @@
     {
         if (Session["LoggedUserTypeName"].ToString() == "Admin")
         {
+            <li>@Html.ActionLink("Add New Admin User", "RegisterAsAdmin", "Account")</li>
+
             <li>@Html.ActionLink("Add Newspaper", "AdminAddNewspaper", "Account")</li>
             <li>@Html.ActionLink("Manage Vendor", "AdminManageVendor", "Account")</li>
             <li>@Html.ActionLink("Bill Generation", "AdminBillGeneration", "Account")</li>
-            @*<li>@Html.ActionLink()</li>*@
-
-
             <li>@Html.ActionLink("Admin LoggedIn", "Logout", "Account")</li>
 
         }

@@ -1,11 +1,11 @@
 ﻿@model OnlineNewspaperDistribution.ViewModels.RegisterViewModel
 @{
-    ViewBag.Title = "Vendor Registration";
+    ViewBag.Title = "Create New Admin user";
 }
 
-<h2>Register As Vendor</h2>
+<h2>Create new Admin User</h2>
 
-@using (Html.BeginForm("RegisterAsVendor", "Account", FormMethod.Post, new { }))
+@using (Html.BeginForm("RegisterAsAdmin", "Account", FormMethod.Post, new { }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(false, null, new { @class = "alert-danger" })
@@ -33,7 +33,7 @@
         @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger" })
     </div>
 
-    <input type="submit" value="Register" name="RegisterAsVendor" class="btn btn-primary" />
+    <input type="submit" value="Register" name="RegisterAsAdmin" class="btn btn-primary" />
 
 }
 

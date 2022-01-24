@@ -3,7 +3,7 @@
     ViewBag.Title = "Customer Registration";
 }
 
-<h2>Register</h2>
+<h2>Register As Customer</h2>
 
 @using (Html.BeginForm("RegisterAsCustomer", "Account", FormMethod.Post, new { }))
 {
@@ -33,7 +33,7 @@
         @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger" })
     </div>
 
-    <input type="submit" valuse="RegisterAsCustomer" name="RegisterAsCustomer" class="btn btn-primary" />
+    <input type="submit" value="Register" name="RegisterAsCustomer" class="btn btn-primary" />
 
 }
 
