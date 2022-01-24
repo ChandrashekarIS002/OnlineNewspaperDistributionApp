@@ -143,7 +143,7 @@
     <Compile Include="Models\BillMaster.cs">
       <DependentUpon>UserMasterModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NewspaperMaster1.cs">
+    <Compile Include="Models\NewspaperMaster.cs">
       <DependentUpon>UserMasterModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StreetMaster.cs">

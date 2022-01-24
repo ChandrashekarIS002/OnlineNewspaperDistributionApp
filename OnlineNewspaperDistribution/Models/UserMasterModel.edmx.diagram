@@ -12,8 +12,8 @@
         <EntityTypeShape EntityType="NewspaperModel.SubscriptionDetail" Width="1.5" PointX="3.75" PointY="0.75" />
         <EntityTypeShape EntityType="NewspaperModel.UseDetail" Width="1.5" PointX="6.75" PointY="3.75" />
         <AssociationConnector Association="NewspaperModel.FK_SubscriptionDetails_SubscriptionDetails" />
-        <EntityTypeShape EntityType="NewspaperModel.NewspaperMaster1" Width="1.5" PointX="4.75" PointY="5" />
         <EntityTypeShape EntityType="NewspaperModel.UserTypeMaster" Width="1.5" PointX="8.5" PointY="7.125" />
+        <EntityTypeShape EntityType="NewspaperModel.NewspaperMaster" Width="1.5" PointX="5.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -32,20 +32,20 @@ namespace OnlineNewspaperDistribution.Controllers
         [HttpPost]
         public ActionResult Login(UserLoginViewModel objUserLoginViewModel)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 if (!objNewspaperEntities1.UserMasters.Any(model => model.EmailId == objUserLoginViewModel.EmailId))
                 {
                     ModelState.AddModelError("Error", objUserLoginViewModel.EmailId + "is does not Exists.");
-                    return View();
+                    return View(objUserLoginViewModel);
 
                 }
                 else
                 {
                     var objuserMaster = objNewspaperEntities1.UserMasters.Single(model => model.EmailId == objUserLoginViewModel.EmailId);
-                if(objuserMaster.Password==
-                        objPbkdf2.Compute(objUserLoginViewModel.Password,objuserMaster.UserSalt))
-                    { 
+                    if (objuserMaster.Password ==
+                            objPbkdf2.Compute(objUserLoginViewModel.Password, objuserMaster.UserSalt))
+                    {
                         return LoginUser(objuserMaster);
                     }
                     else
@@ -56,7 +56,7 @@ namespace OnlineNewspaperDistribution.Controllers
                 }
 
             }
-            return View();
+            return View(objUserLoginViewModel);
         }
         [HttpGet]
         // [ValidateAntiForgeryToken]
@@ -69,7 +69,7 @@ namespace OnlineNewspaperDistribution.Controllers
         [HttpPost]
         public ActionResult RegisterAsAdmin(RegisterViewModel objRegisterViewModel)
         {
-            return RegisterUser(objRegisterViewModel);
+            return RegisterUser(objRegisterViewModel, false);
 
         }
         // //Registration for Vendor
@@ -86,7 +86,7 @@ namespace OnlineNewspaperDistribution.Controllers
         public ActionResult RegisterAsVendor(RegisterViewModel objRegisterViewModel)
         {
             return RegisterUser(objRegisterViewModel);
-            
+
         }
         // //Registration for Customer
 
@@ -105,7 +105,7 @@ namespace OnlineNewspaperDistribution.Controllers
             return RegisterUser(objRegisterViewModel);
         }
 
-       public ActionResult RegisterUser(RegisterViewModel objRegisterViewModel, bool CanUserLogin = true)
+        public ActionResult RegisterUser(RegisterViewModel objRegisterViewModel, bool CanUserLogin = true)
         {
             if (ModelState.IsValid)
             {
@@ -123,17 +123,28 @@ namespace OnlineNewspaperDistribution.Controllers
                     objuserMaster.UserName = objRegisterViewModel.UserName;
                     objuserMaster.EmailId = objRegisterViewModel.EmailId;
                     objuserMaster.UserTypeId = (int)TempData["UserTypeId"];
+                    if (Session["LogginedInUserId"] != null)
+                    {
+                        objuserMaster.CreatedBy = (int)Session["LogginedInUserId"];
+                        objuserMaster.LastEditedBy = (int)Session["LogginedInUserId"];
+                    }
+                    objuserMaster.CreatedDateTime = DateTime.Now;
+                    objuserMaster.LastEditedDateTime = DateTime.Now;
                     TempData.Keep("UserTypeId");
+
+                    objuserMaster.UserSalt = UserSalt;
+                    objuserMaster.Password = objPbkdf2.Compute(objRegisterViewModel.Password, UserSalt);
+                    objNewspaperEntities1.UserMasters.Add(objuserMaster);
+                    objNewspaperEntities1.SaveChanges();
                     if (CanUserLogin)
                     {
-                        objuserMaster.UserSalt = UserSalt;
-                        objuserMaster.Password = objPbkdf2.Compute(objRegisterViewModel.Password, UserSalt);
-                        objNewspaperEntities1.UserMasters.Add(objuserMaster);
-                        objNewspaperEntities1.SaveChanges();
                         return LoginUser(objuserMaster);
 
                     }
-                    
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
             }
             return View("Index");
@@ -144,22 +155,25 @@ namespace OnlineNewspaperDistribution.Controllers
             string UserTypeName = objNewspaperEntities1.UserTypeMasters.Single(UserType => UserType.UserTypeId == objuserMaster.UserTypeId).UserTypeName;
             Session["LoggedUserTypeId"] = objuserMaster.UserTypeId;
             Session["LoggedUserTypeName"] = UserTypeName;
-            AddFormAuthentication(objuserMaster.EmailId);
+            AddFormAuthentication(objuserMaster.EmailId, objuserMaster.UserId);
             return RedirectToAction("Index", "Home");
 
         }
-        private void AddFormAuthentication(string UserName)
+        private void AddFormAuthentication(string UserName, int UserId)
         {
             FormsAuthentication.SetAuthCookie(UserName, false);
             var authTicket = new FormsAuthenticationTicket(1, UserName, DateTime.Now, DateTime.Now.AddMinutes(20), false, string.Empty, FormsAuthentication.FormsCookiePath);
             string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+            Session["LogginedInUserId"] = UserId;
+
             HttpContext.Response.Cookies.Add(authCookie);
         }
 
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+            Session.Clear();
             return RedirectToAction("Index", "Home");
         }
 
@@ -213,4 +227,4 @@ namespace OnlineNewspaperDistribution.Controllers
             return View();
         }
     }
-    }
+}

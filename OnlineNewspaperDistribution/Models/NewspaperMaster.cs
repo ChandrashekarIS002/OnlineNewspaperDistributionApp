@@ -12,7 +12,7 @@ namespace OnlineNewspaperDistribution.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class NewspaperMaster1
+    public partial class NewspaperMaster
     {
         public int NewspaperId { get; set; }
         public string NewspaperName { get; set; }

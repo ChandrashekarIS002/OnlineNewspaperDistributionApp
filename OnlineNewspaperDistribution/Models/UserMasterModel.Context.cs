@@ -31,7 +31,7 @@ namespace OnlineNewspaperDistribution.Models
         public virtual DbSet<StreetMaster> StreetMasters { get; set; }
         public virtual DbSet<SubscriptionDetail> SubscriptionDetails { get; set; }
         public virtual DbSet<UseDetail> UseDetails { get; set; }
-        public virtual DbSet<NewspaperMaster1> NewspaperMaster1 { get; set; }
         public virtual DbSet<UserTypeMaster> UserTypeMasters { get; set; }
+        public virtual DbSet<NewspaperMaster> NewspaperMasters { get; set; }
     }
 }

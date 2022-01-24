@@ -168,8 +168,8 @@
             <End Role="SubscriptionDetail" EntitySet="SubscriptionDetails" />
             <End Role="SubscriptionDetail1" EntitySet="SubscriptionDetails" />
           </AssociationSet>
-          <EntitySet Name="NewspaperMaster1" EntityType="NewspaperModel.NewspaperMaster1" />
           <EntitySet Name="UserTypeMasters" EntityType="NewspaperModel.UserTypeMaster" />
+          <EntitySet Name="NewspaperMasters" EntityType="NewspaperModel.NewspaperMaster" />
         </EntityContainer>
         <EntityType Name="BillDetail">
           <Key>
@@ -252,19 +252,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="NewspaperMaster1">
-          <Key>
-            <PropertyRef Name="NewspaperId" />
-          </Key>
-          <Property Name="NewspaperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NewspaperName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="UserTypeMaster">
           <Key>
             <PropertyRef Name="UserTypeId" />
@@ -276,6 +263,19 @@
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
           <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
           <Property Name="LastEditedDateTIme" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="NewspaperMaster">
+          <Key>
+            <PropertyRef Name="NewspaperId" />
+          </Key>
+          <Property Name="NewspaperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewspaperName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -371,20 +371,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NewspaperMaster1">
-            <EntityTypeMapping TypeName="NewspaperModel.NewspaperMaster1">
-              <MappingFragment StoreEntitySet="NewspaperMaster">
-                <ScalarProperty Name="LastEditedDateTime" ColumnName="LastEditedDateTime" />
-                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="NewspaperName" ColumnName="NewspaperName" />
-                <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserTypeMasters">
             <EntityTypeMapping TypeName="NewspaperModel.UserTypeMaster">
               <MappingFragment StoreEntitySet="UserTypeMaster">
@@ -395,6 +381,20 @@
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="UserTypeName" ColumnName="UserTypeName" />
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewspaperMasters">
+            <EntityTypeMapping TypeName="NewspaperModel.NewspaperMaster">
+              <MappingFragment StoreEntitySet="NewspaperMaster">
+                <ScalarProperty Name="LastEditedDateTime" ColumnName="LastEditedDateTime" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="NewspaperName" ColumnName="NewspaperName" />
+                <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
