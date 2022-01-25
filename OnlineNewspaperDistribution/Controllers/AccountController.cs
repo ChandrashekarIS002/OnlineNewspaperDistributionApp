@@ -179,10 +179,10 @@ namespace OnlineNewspaperDistribution.Controllers
 
         //Admins menus
 
-        public ActionResult AdminAddNewspaper()
-        {
-            return View();
-        }
+        //public ActionResult AdminAddNewspaper()
+        //{
+        //    return View();
+        //}
 
         public ActionResult AdminManageVendor()
         {

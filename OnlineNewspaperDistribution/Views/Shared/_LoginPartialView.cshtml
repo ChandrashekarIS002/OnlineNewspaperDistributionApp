@@ -7,7 +7,7 @@
         {
             <li>@Html.ActionLink("Add New Admin User", "RegisterAsAdmin", "Account")</li>
 
-            <li>@Html.ActionLink("Add Newspaper", "AdminAddNewspaper", "Account")</li>
+            <li>@Html.ActionLink("Add Newspaper", "Index", "NewspaperMasters")</li>
             <li>@Html.ActionLink("Manage Vendor", "AdminManageVendor", "Account")</li>
             <li>@Html.ActionLink("Bill Generation", "AdminBillGeneration", "Account")</li>
             <li>@Html.ActionLink("Admin LoggedIn", "Logout", "Account")</li>
@@ -22,7 +22,7 @@
         }
         if (Session["LoggedUserTypeName"].ToString() == "Customer")
         {
-            <li>@Html.ActionLink("View Newspaper", "CustomerNewspaper", "Account")</li>
+            <li>@Html.ActionLink("View Newspaper", "IndexCustomer", "NewspaperMasters")</li>
             <li>@Html.ActionLink("View Subscription", "CustomerSubscription", "Account")</li>
             <li>@Html.ActionLink("Give Feedback", "CustomerFeedback", "Account")</li>
             <li>@Html.ActionLink("Customer LoggedIn", "Logout", "Account")</li>

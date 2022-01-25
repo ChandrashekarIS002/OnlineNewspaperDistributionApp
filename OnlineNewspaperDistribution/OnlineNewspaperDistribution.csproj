@@ -134,6 +134,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewspaperMastersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -250,8 +251,13 @@
     <Content Include="Views\Account\VendorViewBill.cshtml" />
     <Content Include="Views\Account\AdminBillGeneration.cshtml" />
     <Content Include="Views\Account\AdminManageVendor.cshtml" />
-    <Content Include="Views\Account\AdminAddNewspaper.cshtml" />
     <Content Include="Views\Account\RegisterAsAdmin.cshtml" />
+    <Content Include="Views\NewspaperMasters\Create.cshtml" />
+    <Content Include="Views\NewspaperMasters\Delete.cshtml" />
+    <Content Include="Views\NewspaperMasters\Details.cshtml" />
+    <Content Include="Views\NewspaperMasters\Edit.cshtml" />
+    <Content Include="Views\NewspaperMasters\Index.cshtml" />
+    <Content Include="Views\NewspaperMasters\IndexCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
