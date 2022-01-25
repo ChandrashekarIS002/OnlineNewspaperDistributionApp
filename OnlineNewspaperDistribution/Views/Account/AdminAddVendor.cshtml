@@ -1,0 +1,39 @@
+﻿@model OnlineNewspaperDistribution.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Admin Add Vendor";
+}
+
+<h2>Add Vendor</h2>
+
+@using (Html.BeginForm("AdminAddVendor", "Account", FormMethod.Post, new { }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, null, new { @class = "alert-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName)
+        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.UserName, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EmailId)
+        @Html.TextBoxFor(model => model.EmailId, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.EmailId, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password)
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ConfirmPassword)
+        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger" })
+    </div>
+
+    <input type="submit" value="Register" name="AdminAddVendor" class="btn btn-primary" />
+
+}
+

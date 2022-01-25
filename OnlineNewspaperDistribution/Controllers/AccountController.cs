@@ -72,6 +72,42 @@ namespace OnlineNewspaperDistribution.Controllers
             return RegisterUser(objRegisterViewModel, false);
 
         }
+
+        //Admin Add Vendor
+
+        [HttpGet]
+        public ActionResult AdminAddVendor()
+        {
+            //write linq to find usertypeid using "Vendor" and assign the value to tempdata
+            TempData["UserTypeId"] = 2;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AdminAddVendor(RegisterViewModel objRegisterViewModel)
+        {
+            return RegisterUser(objRegisterViewModel, false);
+
+        }
+
+        //Vendor Add Delevery boy
+
+        [HttpGet]
+        // [ValidateAntiForgeryToken]
+        public ActionResult VendorAddDeleveryBoy()
+        {
+            //write linq to find usertypeid using "Vendor" and assign the value to tempdata
+            TempData["UserTypeId"] = 3;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult VendorAddDeleveryBoy(RegisterViewModel objRegisterViewModel)
+        {
+            return RegisterUser(objRegisterViewModel, false);
+
+        }
+
+
+
         // //Registration for Vendor
 
         [HttpGet]
@@ -88,6 +124,13 @@ namespace OnlineNewspaperDistribution.Controllers
             return RegisterUser(objRegisterViewModel);
 
         }
+
+        
+
+        
+
+
+
         // //Registration for Customer
 
         [HttpGet]
@@ -175,18 +218,6 @@ namespace OnlineNewspaperDistribution.Controllers
             FormsAuthentication.SignOut();
             Session.Clear();
             return RedirectToAction("Index", "Home");
-        }
-
-        //Admins menus
-
-        //public ActionResult AdminAddNewspaper()
-        //{
-        //    return View();
-        //}
-
-        public ActionResult AdminManageVendor()
-        {
-            return View();
         }
 
         public ActionResult AdminBillGeneration()

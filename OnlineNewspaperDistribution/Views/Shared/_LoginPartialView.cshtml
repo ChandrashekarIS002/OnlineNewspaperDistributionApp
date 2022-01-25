@@ -6,16 +6,18 @@
         if (Session["LoggedUserTypeName"].ToString() == "Admin")
         {
             <li>@Html.ActionLink("Add New Admin User", "RegisterAsAdmin", "Account")</li>
+            <li>@Html.ActionLink("Add New Vendor", "AdminAddVendor", "Account")</li>
 
             <li>@Html.ActionLink("Add Newspaper", "Index", "NewspaperMasters")</li>
-            <li>@Html.ActionLink("Manage Vendor", "AdminManageVendor", "Account")</li>
+            <li>@Html.ActionLink("Manage Vendor", "Index", "UserMastersVendor")</li>
             <li>@Html.ActionLink("Bill Generation", "AdminBillGeneration", "Account")</li>
             <li>@Html.ActionLink("Admin LoggedIn", "Logout", "Account")</li>
 
         }
         if (Session["LoggedUserTypeName"].ToString() == "Vendor")
         {
-            <li>@Html.ActionLink("Add Delevery Boy", "VendorDeliveryBoy", "Account")</li>
+            <li>@Html.ActionLink("Add Delevery Boy", "VendorAddDeleveryBoy", "Account")</li>
+            <li>@Html.ActionLink("View Delevery Boy", "IndexViewDeleveryBoy", "UserMastersDeleveryBoy")</li>
             <li>@Html.ActionLink("Subscribed Customer", "VendorCustomerSubscription", "Account")</li>
             <li>@Html.ActionLink("View Bill", "VendorViewBill", "Account")</li>
             <li>@Html.ActionLink("Vendor LoggedIn", "Logout", "Account")</li>

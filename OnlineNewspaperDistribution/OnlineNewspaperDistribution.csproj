@@ -135,6 +135,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewspaperMastersController.cs" />
+    <Compile Include="Controllers\UserMastersDeleveryBoyController.cs" />
+    <Compile Include="Controllers\UserMastersVendorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -258,6 +260,19 @@
     <Content Include="Views\NewspaperMasters\Edit.cshtml" />
     <Content Include="Views\NewspaperMasters\Index.cshtml" />
     <Content Include="Views\NewspaperMasters\IndexCustomer.cshtml" />
+    <Content Include="Views\UserMastersVendor\Create.cshtml" />
+    <Content Include="Views\UserMastersVendor\Delete.cshtml" />
+    <Content Include="Views\UserMastersVendor\Details.cshtml" />
+    <Content Include="Views\UserMastersVendor\Edit.cshtml" />
+    <Content Include="Views\UserMastersVendor\Index.cshtml" />
+    <Content Include="Views\Account\AdminAddVendor.cshtml" />
+    <Content Include="Views\Account\VendorAddDeleveryBoy.cshtml" />
+    <Content Include="Views\UserMastersDeleveryBoy\Create.cshtml" />
+    <Content Include="Views\UserMastersDeleveryBoy\Delete.cshtml" />
+    <Content Include="Views\UserMastersDeleveryBoy\Details.cshtml" />
+    <Content Include="Views\UserMastersDeleveryBoy\Edit.cshtml" />
+    <Content Include="Views\UserMastersDeleveryBoy\Index.cshtml" />
+    <Content Include="Views\UserMastersDeleveryBoy\IndexViewDeleveryBoy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
