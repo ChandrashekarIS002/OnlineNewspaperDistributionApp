@@ -19,6 +19,8 @@ namespace OnlineNewspaperDistribution.Controllers
         {
             List<UserMaster> DeleveryBoylist = new List<UserMaster>();
             DeleveryBoylist = (from s in db.UserMasters where s.UserTypeId.Equals(3) select s).ToList();
+            //var Id = (from x in db.UserMasters where x.UserId.Equals(x.CreatedBy) select x.UserTypeId.Equals(3));
+            //DeleveryBoylist = (from s in db.UserMasters where s.UserTypeId.Equals(3) && s.UserId.Equals(s.CreatedBy) select s).ToList();
             return View(DeleveryBoylist);
         }
 

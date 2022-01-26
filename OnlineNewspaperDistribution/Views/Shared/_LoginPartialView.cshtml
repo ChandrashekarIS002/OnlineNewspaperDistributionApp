@@ -5,29 +5,29 @@
     {
         if (Session["LoggedUserTypeName"].ToString() == "Admin")
         {
-            <li>@Html.ActionLink("Add New Admin User", "RegisterAsAdmin", "Account")</li>
-            <li>@Html.ActionLink("Add New Vendor", "AdminAddVendor", "Account")</li>
+            <li>@Html.ActionLink("Manage Admin User", "RegisterAsAdmin", "Account")</li>
+            @*<li>@Html.ActionLink("Add New Vendor", "AdminAddVendor", "Account")</li>*@
 
-            <li>@Html.ActionLink("Add Newspaper", "Index", "NewspaperMasters")</li>
             <li>@Html.ActionLink("Manage Vendor", "Index", "UserMastersVendor")</li>
+            <li>@Html.ActionLink("Newspaper", "Index", "NewspaperMasters")</li>
             <li>@Html.ActionLink("Bill Generation", "AdminBillGeneration", "Account")</li>
-            <li>@Html.ActionLink("Admin LoggedIn", "Logout", "Account")</li>
+            @*<li>@Html.ActionLink("Admin LoggedIn", "Logout", "Account")</li>*@
 
         }
         if (Session["LoggedUserTypeName"].ToString() == "Vendor")
         {
-            <li>@Html.ActionLink("Add Delevery Boy", "VendorAddDeleveryBoy", "Account")</li>
-            <li>@Html.ActionLink("View Delevery Boy", "IndexViewDeleveryBoy", "UserMastersDeleveryBoy")</li>
+            @*<li>@Html.ActionLink("Add Delevery Boy", "VendorAddDeleveryBoy", "Account")</li>*@
+            <li>@Html.ActionLink("Manage Delevery Boy", "IndexViewDeleveryBoy", "UserMastersDeleveryBoy")</li>
             <li>@Html.ActionLink("Subscribed Customer", "VendorCustomerSubscription", "Account")</li>
             <li>@Html.ActionLink("View Bill", "VendorViewBill", "Account")</li>
-            <li>@Html.ActionLink("Vendor LoggedIn", "Logout", "Account")</li>
+            @*<li>@Html.ActionLink("Vendor LoggedIn", "Logout", "Account")</li>*@
         }
         if (Session["LoggedUserTypeName"].ToString() == "Customer")
         {
-            <li>@Html.ActionLink("View Newspaper", "IndexCustomer", "NewspaperMasters")</li>
-            <li>@Html.ActionLink("View Subscription", "CustomerSubscription", "Account")</li>
-            <li>@Html.ActionLink("Give Feedback", "CustomerFeedback", "Account")</li>
-            <li>@Html.ActionLink("Customer LoggedIn", "Logout", "Account")</li>
+            <li>@Html.ActionLink("Newspaper", "IndexCustomer", "NewspaperMasters")</li>
+            <li>@Html.ActionLink("Manage Subscription", "CustomerSubscription", "Account")</li>
+            <li>@Html.ActionLink("Feedback", "CustomerFeedback", "Account")</li>
+            @*<li>@Html.ActionLink("Customer LoggedIn", "Logout", "Account")</li>*@
         }
     }
     <li>@Html.ActionLink("Logout", "Logout", "Account")</li>

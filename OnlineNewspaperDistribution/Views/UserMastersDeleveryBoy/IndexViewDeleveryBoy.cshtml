@@ -4,11 +4,11 @@
     ViewBag.Title = "IndexViewDeleveryBoy";
 }
 
-<h2>View DeleveryBoy</h2>
+<h2>DeleveryBoy Details</h2>
 
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
+    <p>
+        @Html.ActionLink("Add New DeleveryBoy", "VendorAddDeleveryBoy","Account")
+    </p>
 <table class="table">
     <tr>
         <th>
@@ -20,12 +20,12 @@
         @*<th>
                 @Html.DisplayNameFor(model => model.UserSalt)
             </th>*@
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.UserTypeId)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.Password)
-        </th>
+        </th>*@
         @*<th>
                 @Html.DisplayNameFor(model => model.CreatedBy)
             </th>
@@ -53,9 +53,9 @@
             @*<td>
                     @Html.DisplayFor(modelItem => item.UserSalt)
                 </td>*@
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.UserTypeId)
-            </td>
+            </td>*@
             @*<td>
                     @Html.DisplayFor(modelItem => item.Password)
                 </td>

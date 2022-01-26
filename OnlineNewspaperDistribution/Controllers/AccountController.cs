@@ -96,8 +96,10 @@ namespace OnlineNewspaperDistribution.Controllers
         public ActionResult VendorAddDeleveryBoy()
         {
             //write linq to find usertypeid using "Vendor" and assign the value to tempdata
+          //  var Id = (from x in objNewspaperEntities1.UserMasters where x.UserId.Equals(x.CreatedBy) select x);
             TempData["UserTypeId"] = 3;
-            return View();
+                return View();
+            
         }
         [HttpPost]
         public ActionResult VendorAddDeleveryBoy(RegisterViewModel objRegisterViewModel)

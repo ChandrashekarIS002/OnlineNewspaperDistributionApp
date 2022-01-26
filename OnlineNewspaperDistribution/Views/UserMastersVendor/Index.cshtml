@@ -4,11 +4,11 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Vendor Details</h2>
 
-@*<p>
-    @html.actionlink("create new", "create")
-</p>*@
+    <p>
+            @Html.ActionLink("Add new Vendor", "AdminAddVendor","Account")
+    </p>
 <table class="table">
     <tr>
         <th>
@@ -18,64 +18,65 @@
             @Html.DisplayNameFor(model => model.EmailId)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.UserSalt)
-        </th>*@
+                @Html.DisplayNameFor(model => model.UserSalt)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.UserTypeId)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>*@
+                @Html.DisplayNameFor(model => model.Password)
+            </th>*@
         @*<th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastEditedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastEditedDateTime)
-        </th>*@
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastEditedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastEditedDateTime)
+            </th>*@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmailId)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.UserSalt)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.UserTypeId)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastEditedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastEditedDateTime)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailId)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.UserSalt)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.UserTypeId)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastEditedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastEditedDateTime)
+                </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+            </td>
+        </tr>
+    }
 
 </table>
