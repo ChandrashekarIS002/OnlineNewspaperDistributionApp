@@ -15,10 +15,10 @@ namespace OnlineNewspaperDistribution.Models
     public partial class SubscriptionDetail
     {
         public int SubscriptionId { get; set; }
-        public Nullable<int> NewsPaperId { get; set; }
-        public int CustomerId { get; set; }
-        public string Plans { get; set; }
-        public string Price { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public int NewspaperId { get; set; }
+        public int VendorId { get; set; }
+        public decimal MonthlyPrice { get; set; }
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public int LastEditedBy { get; set; }

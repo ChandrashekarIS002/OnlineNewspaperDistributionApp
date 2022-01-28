@@ -40,6 +40,8 @@
           <Property Name="NewspaperName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="Price" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VendorId" Type="int" />
+          <Property Name="MonthlyPrice" Type="numeric" Precision="18" Scale="2" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="LastEditedBy" Type="int" Nullable="false" />
@@ -56,15 +58,28 @@
           <Property Name="LastEditedBy" Type="int" Nullable="false" />
           <Property Name="LastEditedDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="Subscribed">
+          <Key>
+            <PropertyRef Name="SubscriptionId" />
+          </Key>
+          <Property Name="SubscriptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="NewspaperId" Type="int" Nullable="false" />
+          <Property Name="NewspaperName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
+          <Property Name="MonthlyPrice" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="SubscriptionDetails">
           <Key>
             <PropertyRef Name="SubscriptionId" />
           </Key>
           <Property Name="SubscriptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NewsPaperId" Type="int" />
-          <Property Name="CustomerId" Type="int" Nullable="false" />
-          <Property Name="Plans" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Price" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="NewspaperId" Type="int" Nullable="false" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
+          <Property Name="MonthlyPrice" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="LastEditedBy" Type="int" Nullable="false" />
@@ -72,13 +87,14 @@
         </EntityType>
         <EntityType Name="UseDetails">
           <Key>
-            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserDetailsId" />
           </Key>
-          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Adress" Type="nvarchar" MaxLength="100" />
-          <Property Name="SreeetId" Type="int" Nullable="false" />
+          <Property Name="SreetId" Type="int" Nullable="false" />
           <Property Name="ParentUserId" Type="int" />
-          <Property Name="NewsPaperId" Type="int" />
+          <Property Name="NewspaperId" Type="int" />
           <Property Name="SubscriptionId" Type="int" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDateTime" Type="datetime" />
@@ -129,6 +145,7 @@
           <EntitySet Name="BillMaster" EntityType="Self.BillMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewspaperMaster" EntityType="Self.NewspaperMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StreetMaster" EntityType="Self.StreetMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscribed" EntityType="Self.Subscribed" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubscriptionDetails" EntityType="Self.SubscriptionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UseDetails" EntityType="Self.UseDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
@@ -162,14 +179,15 @@
           <EntitySet Name="BillDetails" EntityType="NewspaperModel.BillDetail" />
           <EntitySet Name="BillMasters" EntityType="NewspaperModel.BillMaster" />
           <EntitySet Name="StreetMasters" EntityType="NewspaperModel.StreetMaster" />
+          <EntitySet Name="UserTypeMasters" EntityType="NewspaperModel.UserTypeMaster" />
+          <EntitySet Name="NewspaperMasters" EntityType="NewspaperModel.NewspaperMaster" />
           <EntitySet Name="SubscriptionDetails" EntityType="NewspaperModel.SubscriptionDetail" />
-          <EntitySet Name="UseDetails" EntityType="NewspaperModel.UseDetail" />
           <AssociationSet Name="FK_SubscriptionDetails_SubscriptionDetails" Association="NewspaperModel.FK_SubscriptionDetails_SubscriptionDetails">
             <End Role="SubscriptionDetail" EntitySet="SubscriptionDetails" />
             <End Role="SubscriptionDetail1" EntitySet="SubscriptionDetails" />
           </AssociationSet>
-          <EntitySet Name="UserTypeMasters" EntityType="NewspaperModel.UserTypeMaster" />
-          <EntitySet Name="NewspaperMasters" EntityType="NewspaperModel.NewspaperMaster" />
+          <EntitySet Name="UseDetails" EntityType="NewspaperModel.UseDetail" />
+          <EntitySet Name="Subscribeds" EntityType="NewspaperModel.Subscribed" />
         </EntityContainer>
         <EntityType Name="BillDetail">
           <Key>
@@ -209,49 +227,6 @@
           <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
           <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="SubscriptionDetail">
-          <Key>
-            <PropertyRef Name="SubscriptionId" />
-          </Key>
-          <Property Name="SubscriptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NewsPaperId" Type="Int32" />
-          <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="Plans" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastEditedDateTIme" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="SubscriptionDetails1" Relationship="NewspaperModel.FK_SubscriptionDetails_SubscriptionDetails" FromRole="SubscriptionDetail" ToRole="SubscriptionDetail1" />
-          <NavigationProperty Name="SubscriptionDetail1" Relationship="NewspaperModel.FK_SubscriptionDetails_SubscriptionDetails" FromRole="SubscriptionDetail1" ToRole="SubscriptionDetail" />
-        </EntityType>
-        <EntityType Name="UseDetail">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="SreeetId" Type="Int32" Nullable="false" />
-          <Property Name="ParentUserId" Type="Int32" />
-          <Property Name="NewsPaperId" Type="Int32" />
-          <Property Name="SubscriptionId" Type="Int32" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastEditedDateTIme" Type="DateTime" Precision="3" />
-        </EntityType>
-        <Association Name="FK_SubscriptionDetails_SubscriptionDetails">
-          <End Type="NewspaperModel.SubscriptionDetail" Role="SubscriptionDetail" Multiplicity="1" />
-          <End Type="NewspaperModel.SubscriptionDetail" Role="SubscriptionDetail1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="SubscriptionDetail">
-              <PropertyRef Name="SubscriptionId" />
-            </Principal>
-            <Dependent Role="SubscriptionDetail1">
-              <PropertyRef Name="SubscriptionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="UserTypeMaster">
           <Key>
             <PropertyRef Name="UserTypeId" />
@@ -272,10 +247,69 @@
           <Property Name="NewspaperName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VendorId" Type="Int32" />
+          <Property Name="MonthlyPrice" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
           <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
           <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SubscriptionDetail">
+          <Key>
+            <PropertyRef Name="SubscriptionId" />
+          </Key>
+          <Property Name="SubscriptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="NewspaperId" Type="Int32" Nullable="false" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="MonthlyPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastEditedDateTIme" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SubscriptionDetails1" Relationship="NewspaperModel.FK_SubscriptionDetails_SubscriptionDetails" FromRole="SubscriptionDetail" ToRole="SubscriptionDetail1" />
+          <NavigationProperty Name="SubscriptionDetail1" Relationship="NewspaperModel.FK_SubscriptionDetails_SubscriptionDetails" FromRole="SubscriptionDetail1" ToRole="SubscriptionDetail" />
+        </EntityType>
+        <Association Name="FK_SubscriptionDetails_SubscriptionDetails">
+          <End Type="NewspaperModel.SubscriptionDetail" Role="SubscriptionDetail" Multiplicity="1" />
+          <End Type="NewspaperModel.SubscriptionDetail" Role="SubscriptionDetail1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SubscriptionDetail">
+              <PropertyRef Name="SubscriptionId" />
+            </Principal>
+            <Dependent Role="SubscriptionDetail1">
+              <PropertyRef Name="SubscriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UseDetail">
+          <Key>
+            <PropertyRef Name="UserDetailsId" />
+          </Key>
+          <Property Name="UserDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SreetId" Type="Int32" Nullable="false" />
+          <Property Name="ParentUserId" Type="Int32" />
+          <Property Name="NewspaperId" Type="Int32" />
+          <Property Name="SubscriptionId" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastEditedDateTIme" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Subscribed">
+          <Key>
+            <PropertyRef Name="SubscriptionId" />
+          </Key>
+          <Property Name="SubscriptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="NewspaperId" Type="Int32" Nullable="false" />
+          <Property Name="NewspaperName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="MonthlyPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -340,37 +374,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SubscriptionDetails">
-            <EntityTypeMapping TypeName="NewspaperModel.SubscriptionDetail">
-              <MappingFragment StoreEntitySet="SubscriptionDetails">
-                <ScalarProperty Name="LastEditedDateTIme" ColumnName="LastEditedDateTIme" />
-                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Plans" ColumnName="Plans" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="NewsPaperId" ColumnName="NewsPaperId" />
-                <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UseDetails">
-            <EntityTypeMapping TypeName="NewspaperModel.UseDetail">
-              <MappingFragment StoreEntitySet="UseDetails">
-                <ScalarProperty Name="LastEditedDateTIme" ColumnName="LastEditedDateTIme" />
-                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
-                <ScalarProperty Name="NewsPaperId" ColumnName="NewsPaperId" />
-                <ScalarProperty Name="ParentUserId" ColumnName="ParentUserId" />
-                <ScalarProperty Name="SreeetId" ColumnName="SreeetId" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserTypeMasters">
             <EntityTypeMapping TypeName="NewspaperModel.UserTypeMaster">
               <MappingFragment StoreEntitySet="UserTypeMaster">
@@ -391,10 +394,58 @@
                 <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
                 <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="MonthlyPrice" ColumnName="MonthlyPrice" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="NewspaperName" ColumnName="NewspaperName" />
                 <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubscriptionDetails">
+            <EntityTypeMapping TypeName="NewspaperModel.SubscriptionDetail">
+              <MappingFragment StoreEntitySet="SubscriptionDetails">
+                <ScalarProperty Name="LastEditedDateTIme" ColumnName="LastEditedDateTIme" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="MonthlyPrice" ColumnName="MonthlyPrice" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UseDetails">
+            <EntityTypeMapping TypeName="NewspaperModel.UseDetail">
+              <MappingFragment StoreEntitySet="UseDetails">
+                <ScalarProperty Name="LastEditedDateTIme" ColumnName="LastEditedDateTIme" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
+                <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
+                <ScalarProperty Name="ParentUserId" ColumnName="ParentUserId" />
+                <ScalarProperty Name="SreetId" ColumnName="SreetId" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserDetailsId" ColumnName="UserDetailsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscribeds">
+            <EntityTypeMapping TypeName="NewspaperModel.Subscribed">
+              <MappingFragment StoreEntitySet="Subscribed">
+                <ScalarProperty Name="MonthlyPrice" ColumnName="MonthlyPrice" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="NewspaperName" ColumnName="NewspaperName" />
+                <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

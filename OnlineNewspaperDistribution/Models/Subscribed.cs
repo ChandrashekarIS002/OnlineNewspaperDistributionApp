@@ -12,17 +12,16 @@ namespace OnlineNewspaperDistribution.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class NewspaperMaster
+    public partial class Subscribed
     {
+        public int Session { get; set; }
+        public int SubscriptionId { get; set; }
+        public int UserId { get; set; }
         public int NewspaperId { get; set; }
         public string NewspaperName { get; set; }
         public bool IsActive { get; set; }
         public decimal Price { get; set; }
-        public Nullable<int> VendorId { get; set; }
-        public Nullable<decimal> MonthlyPrice { get; set; }
-        public int CreatedBy { get; set; }
-        public Nullable<System.DateTime> CreatedDateTime { get; set; }
-        public int LastEditedBy { get; set; }
-        public Nullable<System.DateTime> LastEditedDateTime { get; set; }
+        public int VendorId { get; set; }
+        public decimal MonthlyPrice { get; set; }
     }
 }

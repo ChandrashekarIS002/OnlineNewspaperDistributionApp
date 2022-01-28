@@ -128,5 +128,30 @@ namespace OnlineNewspaperDistribution.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Subscribe(int? id)
+        {
+            NewspaperEntities1 db1 = new NewspaperEntities1();
+            NewspaperMaster s = db.NewspaperMasters.Find(id);
+            Subscribed ss = new Subscribed();
+            //UserMaster L = new UserMaster();
+
+            ss.UserId = Convert.ToInt32(Session["UserId"]);
+            ss.NewspaperId = s.NewspaperId;
+            ss.NewspaperName = s.NewspaperName;
+            ss.Price = s.Price;
+            ss.VendorId = Convert.ToInt32(s.VendorId);
+            ss.MonthlyPrice = Convert.ToDecimal(s.MonthlyPrice);
+            //IssueDetails.IssuedON = DateTime.Now;
+            //IssueDetails.ReturnON = IssueDetails.IssuedON.AddDays(15);
+
+            //book.Quantity = (book.Quantity - 1);
+            db.SaveChanges();
+
+            db1.Subscribeds.Add(ss);
+
+            db1.SaveChanges();
+            return RedirectToAction("IndexCustomer", "NewspaperMasters");
+        }
     }
 }

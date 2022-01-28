@@ -1,16 +1,22 @@
-﻿@model IEnumerable<OnlineNewspaperDistribution.Models.NewspaperMaster>
+﻿@model IEnumerable<OnlineNewspaperDistribution.Models.Subscribed>
 
 @{
-    ViewBag.Title = "IndexCustomer";
+    ViewBag.Title = "Subscribe";
 }
 
-<h2>IndexCustomer</h2>
+<h2>Subscribe</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewspaperId)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.NewspaperName)
         </th>
@@ -26,23 +32,17 @@
         <th>
             @Html.DisplayNameFor(model => model.MonthlyPrice)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastEditedBy)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.LastEditedDateTime)
-        </th>*@
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewspaperId)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.NewspaperName)
         </td>
@@ -58,22 +58,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.MonthlyPrice)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastEditedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastEditedDateTime)
-        </td>*@
-        <td>
-            
-            @Html.ActionLink("Details", "Details", new { id=item.NewspaperId }) |
-            @Html.ActionLink("Subscribe", "Subscribe", new { id=item.NewspaperId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.SubscriptionId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SubscriptionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SubscriptionId })
         </td>
     </tr>
 }

@@ -14,11 +14,12 @@ namespace OnlineNewspaperDistribution.Models
     
     public partial class UseDetail
     {
+        public int UserDetailsId { get; set; }
         public int UserId { get; set; }
         public string Adress { get; set; }
-        public int SreeetId { get; set; }
+        public int SreetId { get; set; }
         public Nullable<int> ParentUserId { get; set; }
-        public Nullable<int> NewsPaperId { get; set; }
+        public Nullable<int> NewspaperId { get; set; }
         public Nullable<int> SubscriptionId { get; set; }
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
