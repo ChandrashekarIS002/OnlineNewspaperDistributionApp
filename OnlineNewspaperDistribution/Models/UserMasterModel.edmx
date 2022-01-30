@@ -71,9 +71,15 @@
           <Property Name="VendorId" Type="int" Nullable="false" />
           <Property Name="MonthlyPrice" Type="numeric" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SubscriptionDetails">
           <Key>
             <PropertyRef Name="SubscriptionId" />
+            
+            
+            
+            
           </Key>
           <Property Name="SubscriptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" />
@@ -82,7 +88,7 @@
           <Property Name="MonthlyPrice" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDateTime" Type="datetime" />
-          <Property Name="LastEditedBy" Type="int" Nullable="false" />
+          <Property Name="LastEditedBy" Type="int" />
           <Property Name="LastEditedDateTIme" Type="datetime" />
         </EntityType>
         <EntityType Name="UseDetails">
@@ -128,15 +134,27 @@
           <Property Name="LastEditedBy" Type="int" Nullable="false" />
           <Property Name="LastEditedDateTIme" Type="datetime" />
         </EntityType>
-        <Association Name="FK_SubscriptionDetails_SubscriptionDetails">
-          <End Role="SubscriptionDetails" Type="Self.SubscriptionDetails" Multiplicity="1" />
-          <End Role="SubscriptionDetails1" Type="Self.SubscriptionDetails" Multiplicity="0..1" />
+        <Association Name="FK_Subscribed_Subscribed">
+          <End Role="Subscribed" Type="Self.Subscribed" Multiplicity="1" />
+          <End Role="Subscribed1" Type="Self.Subscribed" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="SubscriptionDetails">
+            <Principal Role="Subscribed">
               <PropertyRef Name="SubscriptionId" />
             </Principal>
-            <Dependent Role="SubscriptionDetails1">
+            <Dependent Role="Subscribed1">
               <PropertyRef Name="SubscriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="UserMaster1" Type="Self.UserMaster" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserMaster1">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -146,36 +164,36 @@
           <EntitySet Name="NewspaperMaster" EntityType="Self.NewspaperMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StreetMaster" EntityType="Self.StreetMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subscribed" EntityType="Self.Subscribed" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SubscriptionDetails" EntityType="Self.SubscriptionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UseDetails" EntityType="Self.UseDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTypeMaster" EntityType="Self.UserTypeMaster" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_SubscriptionDetails_SubscriptionDetails" Association="Self.FK_SubscriptionDetails_SubscriptionDetails">
-            <End Role="SubscriptionDetails" EntitySet="SubscriptionDetails" />
-            <End Role="SubscriptionDetails1" EntitySet="SubscriptionDetails" />
+          <EntitySet Name="SubscriptionDetails" EntityType="Self.SubscriptionDetails" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SubscriptionDetails].[SubscriptionId] AS [SubscriptionId], 
+    [SubscriptionDetails].[UserId] AS [UserId], 
+    [SubscriptionDetails].[NewspaperId] AS [NewspaperId], 
+    [SubscriptionDetails].[VendorId] AS [VendorId], 
+    [SubscriptionDetails].[MonthlyPrice] AS [MonthlyPrice], 
+    [SubscriptionDetails].[CreatedBy] AS [CreatedBy], 
+    [SubscriptionDetails].[CreatedDateTime] AS [CreatedDateTime], 
+    [SubscriptionDetails].[LastEditedBy] AS [LastEditedBy], 
+    [SubscriptionDetails].[LastEditedDateTIme] AS [LastEditedDateTIme]
+    FROM [dbo].[SubscriptionDetails] AS [SubscriptionDetails]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Subscribed_Subscribed" Association="Self.FK_Subscribed_Subscribed">
+            <End Role="Subscribed" EntitySet="Subscribed" />
+            <End Role="Subscribed1" EntitySet="Subscribed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_UserMaster" Association="Self.FK_UserMaster_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="UserMaster1" EntitySet="UserMaster" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NewspaperModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="UserMaster">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="EmailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserSalt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityContainer Name="NewspaperEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="UserMasters" EntityType="Self.UserMaster" />
           <EntitySet Name="BillDetails" EntityType="NewspaperModel.BillDetail" />
           <EntitySet Name="BillMasters" EntityType="NewspaperModel.BillMaster" />
           <EntitySet Name="StreetMasters" EntityType="NewspaperModel.StreetMaster" />
@@ -188,6 +206,15 @@
           </AssociationSet>
           <EntitySet Name="UseDetails" EntityType="NewspaperModel.UseDetail" />
           <EntitySet Name="Subscribeds" EntityType="NewspaperModel.Subscribed" />
+          <AssociationSet Name="FK_Subscribed_Subscribed" Association="NewspaperModel.FK_Subscribed_Subscribed">
+            <End Role="Subscribed" EntitySet="Subscribeds" />
+            <End Role="Subscribed1" EntitySet="Subscribeds" />
+          </AssociationSet>
+          <EntitySet Name="UserMasters" EntityType="NewspaperModel.UserMaster" />
+          <AssociationSet Name="FK_UserMaster_UserMaster" Association="NewspaperModel.FK_UserMaster_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="UserMaster1" EntitySet="UserMasters" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="BillDetail">
           <Key>
@@ -265,7 +292,7 @@
           <Property Name="MonthlyPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastEditedBy" Type="Int32" />
           <Property Name="LastEditedDateTIme" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SubscriptionDetails1" Relationship="NewspaperModel.FK_SubscriptionDetails_SubscriptionDetails" FromRole="SubscriptionDetail" ToRole="SubscriptionDetail1" />
           <NavigationProperty Name="SubscriptionDetail1" Relationship="NewspaperModel.FK_SubscriptionDetails_SubscriptionDetails" FromRole="SubscriptionDetail1" ToRole="SubscriptionDetail" />
@@ -310,29 +337,56 @@
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="VendorId" Type="Int32" Nullable="false" />
           <Property Name="MonthlyPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="Subscribed1" Relationship="NewspaperModel.FK_Subscribed_Subscribed" FromRole="Subscribed" ToRole="Subscribed1" />
+          <NavigationProperty Name="Subscribed2" Relationship="NewspaperModel.FK_Subscribed_Subscribed" FromRole="Subscribed1" ToRole="Subscribed" />
         </EntityType>
+        <Association Name="FK_Subscribed_Subscribed">
+          <End Type="NewspaperModel.Subscribed" Role="Subscribed" Multiplicity="1" />
+          <End Type="NewspaperModel.Subscribed" Role="Subscribed1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Subscribed">
+              <PropertyRef Name="SubscriptionId" />
+            </Principal>
+            <Dependent Role="Subscribed1">
+              <PropertyRef Name="SubscriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EmailId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserSalt" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserMaster1" Relationship="NewspaperModel.FK_UserMaster_UserMaster" FromRole="UserMaster" ToRole="UserMaster1" />
+          <NavigationProperty Name="UserMaster2" Relationship="NewspaperModel.FK_UserMaster_UserMaster" FromRole="UserMaster1" ToRole="UserMaster" />
+        </EntityType>
+        <Association Name="FK_UserMaster_UserMaster">
+          <End Type="NewspaperModel.UserMaster" Role="UserMaster" Multiplicity="1" />
+          <End Type="NewspaperModel.UserMaster" Role="UserMaster1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserMaster1">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="NewspaperModelStoreContainer" CdmEntityContainer="NewspaperEntities1">
-          <EntitySetMapping Name="UserMasters">
-            <EntityTypeMapping TypeName="NewspaperModel.UserMaster">
-              <MappingFragment StoreEntitySet="UserMaster">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
-                <ScalarProperty Name="UserSalt" ColumnName="UserSalt" />
-                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
-                <ScalarProperty Name="LastEditedDateTime" ColumnName="LastEditedDateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BillDetails">
             <EntityTypeMapping TypeName="NewspaperModel.BillDetail">
               <MappingFragment StoreEntitySet="BillDetails">
@@ -446,6 +500,22 @@
                 <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="NewspaperModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMaster">
+                <ScalarProperty Name="LastEditedDateTime" ColumnName="LastEditedDateTime" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="UserSalt" ColumnName="UserSalt" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

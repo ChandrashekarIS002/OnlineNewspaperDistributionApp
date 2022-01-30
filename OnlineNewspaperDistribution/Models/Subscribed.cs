@@ -14,7 +14,6 @@ namespace OnlineNewspaperDistribution.Models
     
     public partial class Subscribed
     {
-        public int Session { get; set; }
         public int SubscriptionId { get; set; }
         public int UserId { get; set; }
         public int NewspaperId { get; set; }
@@ -23,5 +22,8 @@ namespace OnlineNewspaperDistribution.Models
         public decimal Price { get; set; }
         public int VendorId { get; set; }
         public decimal MonthlyPrice { get; set; }
+    
+        public virtual Subscribed Subscribed1 { get; set; }
+        public virtual Subscribed Subscribed2 { get; set; }
     }
 }

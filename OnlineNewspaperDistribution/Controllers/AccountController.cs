@@ -227,16 +227,7 @@ namespace OnlineNewspaperDistribution.Controllers
             return View();
         }
 
-        //Customers menus
-        public ActionResult CustomerNewspaper()
-        {
-            return View();
-        }
-
-        public ActionResult CustomerSubscription()
-        {
-            return View();
-        }
+      
 
         public ActionResult CustomerFeedback()
         {
@@ -244,16 +235,6 @@ namespace OnlineNewspaperDistribution.Controllers
         }
 
         //vendor menus
-
-        public ActionResult VendorDeliveryBoy()
-        {
-            return View();
-        }
-
-        public ActionResult VendorCustomerSubscription()
-        {
-            return View();
-        }
 
         public ActionResult VendorViewBill()
         {

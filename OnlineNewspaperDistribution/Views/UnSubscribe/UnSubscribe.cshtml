@@ -1,0 +1,96 @@
+﻿@model OnlineNewspaperDistribution.Models.Subscribed
+
+@{
+    ViewBag.Title = "UnSubscribe";
+}
+
+<h2>UnSubscribe</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Subscribed</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewspaperId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewspaperId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewspaperName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewspaperName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MonthlyPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MonthlyPrice)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Subscribed1.NewspaperName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subscribed1.NewspaperName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subscribed2.NewspaperName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subscribed2.NewspaperName)
+        </dd>*@
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="UnSubscribe" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

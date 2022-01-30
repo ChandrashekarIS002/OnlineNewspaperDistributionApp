@@ -24,5 +24,8 @@ namespace OnlineNewspaperDistribution.Models
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public int LastEditedBy { get; set; }
         public Nullable<System.DateTime> LastEditedDateTime { get; set; }
+    
+        public virtual UserMaster UserMaster1 { get; set; }
+        public virtual UserMaster UserMaster2 { get; set; }
     }
 }

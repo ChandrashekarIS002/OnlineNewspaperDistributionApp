@@ -25,6 +25,11 @@ namespace OnlineNewspaperDistribution.Controllers
         {
             return View(db.NewspaperMasters.ToList());
         }
+
+        //public ActionResult IndexCusSub()
+        //{
+        //    return View(db.Subscribeds.ToList());
+        //}
         // GET: NewspaperMasters/Details/5
         public ActionResult Details(int? id)
         {
@@ -136,16 +141,15 @@ namespace OnlineNewspaperDistribution.Controllers
             Subscribed ss = new Subscribed();
             //UserMaster L = new UserMaster();
 
-            ss.UserId = Convert.ToInt32(Session["UserId"]);
+            //var loggedinId = (int)Session["LogginedInUserId"];
+            ss.UserId = (int)Session["LogginedInUserId"];
             ss.NewspaperId = s.NewspaperId;
             ss.NewspaperName = s.NewspaperName;
+            ss.IsActive = (bool)s.IsActive;
             ss.Price = s.Price;
             ss.VendorId = Convert.ToInt32(s.VendorId);
             ss.MonthlyPrice = Convert.ToDecimal(s.MonthlyPrice);
-            //IssueDetails.IssuedON = DateTime.Now;
-            //IssueDetails.ReturnON = IssueDetails.IssuedON.AddDays(15);
-
-            //book.Quantity = (book.Quantity - 1);
+          
             db.SaveChanges();
 
             db1.Subscribeds.Add(ss);

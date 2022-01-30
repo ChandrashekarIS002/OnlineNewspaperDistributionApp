@@ -10,22 +10,21 @@ using OnlineNewspaperDistribution.Models;
 
 namespace OnlineNewspaperDistribution.Controllers
 {
-    public class SubscribedsController : Controller
+    public class UnSubscribeController : Controller
     {
         private NewspaperEntities1 db = new NewspaperEntities1();
 
-        // GET: Subscribeds
+        // GET: UnSubscribe
         public ActionResult Index()
         {
             var loggiedinId = (int)Session["LogginedInUserId"];
             List<Subscribed> mylist = new List<Subscribed>();
-            mylist = (from s in db.Subscribeds where s.VendorId.Equals(loggiedinId) select s).ToList();
+            mylist = (from s in db.Subscribeds where s.UserId.Equals(loggiedinId) select s).ToList();
             //var subscribeds = db.Subscribeds.Include(s => s.Subscribed1).Include(s => s.Subscribed2);
-            return View(mylist);
-            //return View(db.Subscribeds.ToList());
+           return View(mylist);
         }
 
-        // GET: Subscribeds/Details/5
+        // GET: UnSubscribe/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,13 +39,15 @@ namespace OnlineNewspaperDistribution.Controllers
             return View(subscribed);
         }
 
-        // GET: Subscribeds/Create
+        // GET: UnSubscribe/Create
         public ActionResult Create()
         {
+            ViewBag.SubscriptionId = new SelectList(db.Subscribeds, "SubscriptionId", "NewspaperName");
+            ViewBag.SubscriptionId = new SelectList(db.Subscribeds, "SubscriptionId", "NewspaperName");
             return View();
         }
 
-        // POST: Subscribeds/Create
+        // POST: UnSubscribe/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -60,10 +61,12 @@ namespace OnlineNewspaperDistribution.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.SubscriptionId = new SelectList(db.Subscribeds, "SubscriptionId", "NewspaperName", subscribed.SubscriptionId);
+            ViewBag.SubscriptionId = new SelectList(db.Subscribeds, "SubscriptionId", "NewspaperName", subscribed.SubscriptionId);
             return View(subscribed);
         }
 
-        // GET: Subscribeds/Edit/5
+        // GET: UnSubscribe/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -75,10 +78,12 @@ namespace OnlineNewspaperDistribution.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.SubscriptionId = new SelectList(db.Subscribeds, "SubscriptionId", "NewspaperName", subscribed.SubscriptionId);
+            ViewBag.SubscriptionId = new SelectList(db.Subscribeds, "SubscriptionId", "NewspaperName", subscribed.SubscriptionId);
             return View(subscribed);
         }
 
-        // POST: Subscribeds/Edit/5
+        // POST: UnSubscribe/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -91,11 +96,13 @@ namespace OnlineNewspaperDistribution.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.SubscriptionId = new SelectList(db.Subscribeds, "SubscriptionId", "NewspaperName", subscribed.SubscriptionId);
+            ViewBag.SubscriptionId = new SelectList(db.Subscribeds, "SubscriptionId", "NewspaperName", subscribed.SubscriptionId);
             return View(subscribed);
         }
 
-        // GET: Subscribeds/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: UnSubscribe/Delete/5
+        public ActionResult UnSubscribe(int? id)
         {
             if (id == null)
             {
@@ -109,8 +116,8 @@ namespace OnlineNewspaperDistribution.Controllers
             return View(subscribed);
         }
 
-        // POST: Subscribeds/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: UnSubscribe/Delete/5
+        [HttpPost, ActionName("UnSubscribe")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -128,30 +135,5 @@ namespace OnlineNewspaperDistribution.Controllers
             }
             base.Dispose(disposing);
         }
-
-        //public ActionResult Subscribe(int? id)
-        //{
-        //    NewspaperEntities1 db1 = new NewspaperEntities1();
-        //    NewspaperMaster s = db.NewspaperMasters.Find(id);
-        //    Subscribed ss = new Subscribed();
-        //    //UserMaster L = new UserMaster();
-
-        //    ss.UserId = Convert.ToInt32(Session["UserId"]);
-        //    ss.NewspaperId = s.NewspaperId;
-        //    ss.NewspaperName = s.NewspaperName;
-        //    ss.Price = s.Price;
-        //    ss.VendorId = Convert.ToInt32(s.VendorId);
-        //    ss.MonthlyPrice = Convert.ToDecimal(s.MonthlyPrice);
-        //    //IssueDetails.IssuedON = DateTime.Now;
-        //    //IssueDetails.ReturnON = IssueDetails.IssuedON.AddDays(15);
-
-        //    //book.Quantity = (book.Quantity - 1);
-        //    db.SaveChanges();
-
-        //    db1.Subscribeds.Add(ss);
-
-        //    db1.SaveChanges();
-        //    return RedirectToAction("Index", "Subscribedes");
-        //}
     }
 }

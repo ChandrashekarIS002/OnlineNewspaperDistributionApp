@@ -21,7 +21,7 @@ namespace OnlineNewspaperDistribution.Models
         public decimal MonthlyPrice { get; set; }
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
-        public int LastEditedBy { get; set; }
+        public Nullable<int> LastEditedBy { get; set; }
         public Nullable<System.DateTime> LastEditedDateTIme { get; set; }
     
         public virtual SubscriptionDetail SubscriptionDetails1 { get; set; }

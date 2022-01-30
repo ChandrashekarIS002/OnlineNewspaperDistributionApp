@@ -136,6 +136,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewspaperMastersController.cs" />
     <Compile Include="Controllers\SubscribedsController.cs" />
+    <Compile Include="Controllers\UnSubscribeController.cs" />
     <Compile Include="Controllers\UserMastersDeleveryBoyController.cs" />
     <Compile Include="Controllers\UserMastersVendorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -284,6 +285,13 @@
     <Content Include="Views\Subscribeds\Index.cshtml" />
     <Content Include="Views\Subscribeds\Subscribe.cshtml" />
     <Content Include="Views\NewspaperMasters\Subscribe.cshtml" />
+    <Content Include="Views\UserMastersVendor\IndexSubCustomer.cshtml" />
+    <Content Include="Views\NewspaperMasters\IndexCusSub.cshtml" />
+    <Content Include="Views\UnSubscribe\Create.cshtml" />
+    <Content Include="Views\UnSubscribe\UnSubscribe.cshtml" />
+    <Content Include="Views\UnSubscribe\Details.cshtml" />
+    <Content Include="Views\UnSubscribe\Edit.cshtml" />
+    <Content Include="Views\UnSubscribe\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
