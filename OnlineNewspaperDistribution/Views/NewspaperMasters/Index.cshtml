@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<OnlineNewspaperDistribution.Models.NewspaperMaster>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Newspaper Details";
 }
 
-<h2>Index</h2>
+<h2>Newspaper Details</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Newspaper", "Create")
 </p>
 <table class="table">
     <tr>
@@ -26,7 +26,7 @@
         <th>
             @Html.DisplayNameFor(model => model.MonthlyPrice)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.CreatedBy)
         </th>
         <th>
@@ -37,7 +37,7 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LastEditedDateTime)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -58,7 +58,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.MonthlyPrice)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.CreatedBy)
         </td>
         <td>
@@ -69,7 +69,7 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.LastEditedDateTime)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.NewspaperId }) |
             @Html.ActionLink("Details", "Details", new { id=item.NewspaperId }) |

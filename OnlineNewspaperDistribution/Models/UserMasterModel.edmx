@@ -63,13 +63,15 @@
             <PropertyRef Name="SubscriptionId" />
           </Key>
           <Property Name="SubscriptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
           <Property Name="NewspaperId" Type="int" Nullable="false" />
           <Property Name="NewspaperName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="Price" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="VendorId" Type="int" Nullable="false" />
           <Property Name="MonthlyPrice" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="StreetId" Type="int" />
+          <Property Name="DeleveryBoyId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -97,8 +99,9 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
           </Key>
           <Property Name="UserDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="Adress" Type="nvarchar" MaxLength="100" />
-          <Property Name="SreetId" Type="int" Nullable="false" />
+          <Property Name="UserTypeId" Type="int" />
+          <Property Name="StreetName" Type="nvarchar(max)" />
+          <Property Name="StreetId" Type="int" Nullable="false" />
           <Property Name="ParentUserId" Type="int" />
           <Property Name="NewspaperId" Type="int" />
           <Property Name="SubscriptionId" Type="int" />
@@ -204,17 +207,17 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
             <End Role="SubscriptionDetail" EntitySet="SubscriptionDetails" />
             <End Role="SubscriptionDetail1" EntitySet="SubscriptionDetails" />
           </AssociationSet>
-          <EntitySet Name="UseDetails" EntityType="NewspaperModel.UseDetail" />
-          <EntitySet Name="Subscribeds" EntityType="NewspaperModel.Subscribed" />
-          <AssociationSet Name="FK_Subscribed_Subscribed" Association="NewspaperModel.FK_Subscribed_Subscribed">
-            <End Role="Subscribed" EntitySet="Subscribeds" />
-            <End Role="Subscribed1" EntitySet="Subscribeds" />
-          </AssociationSet>
           <EntitySet Name="UserMasters" EntityType="NewspaperModel.UserMaster" />
           <AssociationSet Name="FK_UserMaster_UserMaster" Association="NewspaperModel.FK_UserMaster_UserMaster">
             <End Role="UserMaster" EntitySet="UserMasters" />
             <End Role="UserMaster1" EntitySet="UserMasters" />
           </AssociationSet>
+          <EntitySet Name="Subscribeds" EntityType="NewspaperModel.Subscribed" />
+          <AssociationSet Name="FK_Subscribed_Subscribed" Association="NewspaperModel.FK_Subscribed_Subscribed">
+            <End Role="Subscribed" EntitySet="Subscribeds" />
+            <End Role="Subscribed1" EntitySet="Subscribeds" />
+          </AssociationSet>
+          <EntitySet Name="UseDetails" EntityType="NewspaperModel.UseDetail" />
         </EntityContainer>
         <EntityType Name="BillDetail">
           <Key>
@@ -309,49 +312,6 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="UseDetail">
-          <Key>
-            <PropertyRef Name="UserDetailsId" />
-          </Key>
-          <Property Name="UserDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="SreetId" Type="Int32" Nullable="false" />
-          <Property Name="ParentUserId" Type="Int32" />
-          <Property Name="NewspaperId" Type="Int32" />
-          <Property Name="SubscriptionId" Type="Int32" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastEditedDateTIme" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="Subscribed">
-          <Key>
-            <PropertyRef Name="SubscriptionId" />
-          </Key>
-          <Property Name="SubscriptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="NewspaperId" Type="Int32" Nullable="false" />
-          <Property Name="NewspaperName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="VendorId" Type="Int32" Nullable="false" />
-          <Property Name="MonthlyPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <NavigationProperty Name="Subscribed1" Relationship="NewspaperModel.FK_Subscribed_Subscribed" FromRole="Subscribed" ToRole="Subscribed1" />
-          <NavigationProperty Name="Subscribed2" Relationship="NewspaperModel.FK_Subscribed_Subscribed" FromRole="Subscribed1" ToRole="Subscribed" />
-        </EntityType>
-        <Association Name="FK_Subscribed_Subscribed">
-          <End Type="NewspaperModel.Subscribed" Role="Subscribed" Multiplicity="1" />
-          <End Type="NewspaperModel.Subscribed" Role="Subscribed1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Subscribed">
-              <PropertyRef Name="SubscriptionId" />
-            </Principal>
-            <Dependent Role="Subscribed1">
-              <PropertyRef Name="SubscriptionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="UserMaster">
           <Key>
             <PropertyRef Name="UserId" />
@@ -381,6 +341,52 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Subscribed">
+          <Key>
+            <PropertyRef Name="SubscriptionId" />
+          </Key>
+          <Property Name="SubscriptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="NewspaperId" Type="Int32" Nullable="false" />
+          <Property Name="NewspaperName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="MonthlyPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="StreetId" Type="Int32" />
+          <Property Name="DeleveryBoyId" Type="Int32" />
+          <NavigationProperty Name="Subscribed1" Relationship="NewspaperModel.FK_Subscribed_Subscribed" FromRole="Subscribed" ToRole="Subscribed1" />
+          <NavigationProperty Name="Subscribed2" Relationship="NewspaperModel.FK_Subscribed_Subscribed" FromRole="Subscribed1" ToRole="Subscribed" />
+        </EntityType>
+        <Association Name="FK_Subscribed_Subscribed">
+          <End Type="NewspaperModel.Subscribed" Role="Subscribed" Multiplicity="1" />
+          <End Type="NewspaperModel.Subscribed" Role="Subscribed1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Subscribed">
+              <PropertyRef Name="SubscriptionId" />
+            </Principal>
+            <Dependent Role="Subscribed1">
+              <PropertyRef Name="SubscriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UseDetail">
+          <Key>
+            <PropertyRef Name="UserDetailsId" />
+          </Key>
+          <Property Name="UserDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserTypeId" Type="Int32" />
+          <Property Name="StreetName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StreetId" Type="Int32" Nullable="false" />
+          <Property Name="ParentUserId" Type="Int32" />
+          <Property Name="NewspaperId" Type="Int32" />
+          <Property Name="SubscriptionId" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastEditedDateTIme" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -472,37 +478,6 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UseDetails">
-            <EntityTypeMapping TypeName="NewspaperModel.UseDetail">
-              <MappingFragment StoreEntitySet="UseDetails">
-                <ScalarProperty Name="LastEditedDateTIme" ColumnName="LastEditedDateTIme" />
-                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
-                <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
-                <ScalarProperty Name="ParentUserId" ColumnName="ParentUserId" />
-                <ScalarProperty Name="SreetId" ColumnName="SreetId" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserDetailsId" ColumnName="UserDetailsId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Subscribeds">
-            <EntityTypeMapping TypeName="NewspaperModel.Subscribed">
-              <MappingFragment StoreEntitySet="Subscribed">
-                <ScalarProperty Name="MonthlyPrice" ColumnName="MonthlyPrice" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="NewspaperName" ColumnName="NewspaperName" />
-                <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserMasters">
             <EntityTypeMapping TypeName="NewspaperModel.UserMaster">
               <MappingFragment StoreEntitySet="UserMaster">
@@ -516,6 +491,40 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
                 <ScalarProperty Name="EmailId" ColumnName="EmailId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscribeds">
+            <EntityTypeMapping TypeName="NewspaperModel.Subscribed">
+              <MappingFragment StoreEntitySet="Subscribed">
+                <ScalarProperty Name="DeleveryBoyId" ColumnName="DeleveryBoyId" />
+                <ScalarProperty Name="StreetId" ColumnName="StreetId" />
+                <ScalarProperty Name="MonthlyPrice" ColumnName="MonthlyPrice" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="NewspaperName" ColumnName="NewspaperName" />
+                <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UseDetails">
+            <EntityTypeMapping TypeName="NewspaperModel.UseDetail">
+              <MappingFragment StoreEntitySet="UseDetails">
+                <ScalarProperty Name="LastEditedDateTIme" ColumnName="LastEditedDateTIme" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
+                <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
+                <ScalarProperty Name="ParentUserId" ColumnName="ParentUserId" />
+                <ScalarProperty Name="StreetId" ColumnName="StreetId" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserDetailsId" ColumnName="UserDetailsId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

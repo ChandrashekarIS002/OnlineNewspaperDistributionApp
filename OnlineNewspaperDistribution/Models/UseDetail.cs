@@ -16,8 +16,9 @@ namespace OnlineNewspaperDistribution.Models
     {
         public int UserDetailsId { get; set; }
         public int UserId { get; set; }
-        public string Adress { get; set; }
-        public int SreetId { get; set; }
+        public Nullable<int> UserTypeId { get; set; }
+        public string StreetName { get; set; }
+        public int StreetId { get; set; }
         public Nullable<int> ParentUserId { get; set; }
         public Nullable<int> NewspaperId { get; set; }
         public Nullable<int> SubscriptionId { get; set; }

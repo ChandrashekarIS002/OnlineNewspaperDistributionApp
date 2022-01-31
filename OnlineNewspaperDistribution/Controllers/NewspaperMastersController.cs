@@ -149,7 +149,11 @@ namespace OnlineNewspaperDistribution.Controllers
             ss.Price = s.Price;
             ss.VendorId = Convert.ToInt32(s.VendorId);
             ss.MonthlyPrice = Convert.ToDecimal(s.MonthlyPrice);
-          
+
+            ss.StreetId = (from b in db1.UseDetails where b.UserId.Equals(ss.UserId) select b.StreetId).Single();
+        
+            ss.DeleveryBoyId = (from a in db1.UseDetails where a.UserTypeId==3 && a.StreetId==ss.StreetId select a.UserId).Single();
+
             db.SaveChanges();
 
             db1.Subscribeds.Add(ss);

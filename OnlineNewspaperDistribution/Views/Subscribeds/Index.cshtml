@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<OnlineNewspaperDistribution.Models.Subscribed>
 
 @{
-    ViewBag.Title = "Subscribed Customers";
+    ViewBag.Title = "Subscribed Customer";
 }
 
-<h2>Subscribed Customers</h2>
+<h2>Subscribed Customer</h2>
 
 @*<p>
     @Html.ActionLink("Create New", "Create")
@@ -32,6 +32,18 @@
         <th>
             @Html.DisplayNameFor(model => model.MonthlyPrice)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StreetId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeleveryBoyId)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Subscribed1.NewspaperName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subscribed2.NewspaperName)
+        </th>*@
         <th></th>
     </tr>
 
@@ -58,6 +70,18 @@
         <td>
             @Html.DisplayFor(modelItem => item.MonthlyPrice)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StreetId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeleveryBoyId)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Subscribed1.NewspaperName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subscribed2.NewspaperName)
+        </td>*@
         @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.SubscriptionId }) |
             @Html.ActionLink("Details", "Details", new { id=item.SubscriptionId }) |

@@ -22,6 +22,8 @@ namespace OnlineNewspaperDistribution.Models
         public decimal Price { get; set; }
         public int VendorId { get; set; }
         public decimal MonthlyPrice { get; set; }
+        public Nullable<int> StreetId { get; set; }
+        public Nullable<int> DeleveryBoyId { get; set; }
     
         public virtual Subscribed Subscribed1 { get; set; }
         public virtual Subscribed Subscribed2 { get; set; }
