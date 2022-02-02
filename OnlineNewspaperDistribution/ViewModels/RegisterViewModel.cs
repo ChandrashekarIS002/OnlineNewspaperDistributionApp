@@ -46,6 +46,11 @@ namespace OnlineNewspaperDistribution.ViewModels
         [DataType(DataType.EmailAddress, ErrorMessage = "Please enter EmailId address.")]
         public string EmailId { get; set; }
 
+        [Display(Name = "Address : ")]
+        [Required(ErrorMessage = "Address is required.")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Please enter Address.")]
+        public string StreetName { get; set; }
+
         [Display(Name = "Password : ")]
         [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]

@@ -22,6 +22,12 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(model => model.StreetName)
+        @Html.TextBoxFor(model => model.StreetName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.StreetName, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(model => model.Password)
         @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })

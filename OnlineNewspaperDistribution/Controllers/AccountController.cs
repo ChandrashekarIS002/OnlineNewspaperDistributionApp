@@ -167,6 +167,8 @@ namespace OnlineNewspaperDistribution.Controllers
                     //objuserMaster.UserId = Guid.NewGuid();
                     objuserMaster.UserName = objRegisterViewModel.UserName;
                     objuserMaster.EmailId = objRegisterViewModel.EmailId;
+                    objuserMaster.StreetName = objRegisterViewModel.StreetName;
+
                     objuserMaster.UserTypeId = (int)TempData["UserTypeId"];
                     if (Session["LogginedInUserId"] != null)
                     {

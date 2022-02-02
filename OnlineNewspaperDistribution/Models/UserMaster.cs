@@ -17,6 +17,7 @@ namespace OnlineNewspaperDistribution.Models
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string EmailId { get; set; }
+        public string StreetName { get; set; }
         public string UserSalt { get; set; }
         public int UserTypeId { get; set; }
         public string Password { get; set; }

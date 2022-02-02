@@ -126,6 +126,7 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="EmailId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StreetName" Type="nvarchar(max)" />
           <Property Name="UserSalt" Type="nvarchar(max)" Nullable="false" />
           <Property Name="UserTypeId" Type="int" Nullable="false" />
           <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
@@ -215,11 +216,6 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
             <End Role="SubscriptionDetail" EntitySet="SubscriptionDetails" />
             <End Role="SubscriptionDetail1" EntitySet="SubscriptionDetails" />
           </AssociationSet>
-          <EntitySet Name="UserMasters" EntityType="NewspaperModel.UserMaster" />
-          <AssociationSet Name="FK_UserMaster_UserMaster" Association="NewspaperModel.FK_UserMaster_UserMaster">
-            <End Role="UserMaster" EntitySet="UserMasters" />
-            <End Role="UserMaster1" EntitySet="UserMasters" />
-          </AssociationSet>
           <EntitySet Name="Subscribeds" EntityType="NewspaperModel.Subscribed" />
           <AssociationSet Name="FK_Subscribed_Subscribed" Association="NewspaperModel.FK_Subscribed_Subscribed">
             <End Role="Subscribed" EntitySet="Subscribeds" />
@@ -229,6 +225,11 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
           <EntitySet Name="BillMasters" EntityType="NewspaperModel.BillMaster" />
           <EntitySet Name="BillDetails" EntityType="NewspaperModel.BillDetail" />
           <EntitySet Name="Feedbacks" EntityType="NewspaperModel.Feedback" />
+          <EntitySet Name="UserMasters" EntityType="NewspaperModel.UserMaster" />
+          <AssociationSet Name="FK_UserMaster_UserMaster" Association="NewspaperModel.FK_UserMaster_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="UserMaster1" EntitySet="UserMasters" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="StreetMaster">
           <Key>
@@ -293,35 +294,6 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
             </Principal>
             <Dependent Role="SubscriptionDetail1">
               <PropertyRef Name="SubscriptionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="UserMaster">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="EmailId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserSalt" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="UserMaster1" Relationship="NewspaperModel.FK_UserMaster_UserMaster" FromRole="UserMaster" ToRole="UserMaster1" />
-          <NavigationProperty Name="UserMaster2" Relationship="NewspaperModel.FK_UserMaster_UserMaster" FromRole="UserMaster1" ToRole="UserMaster" />
-        </EntityType>
-        <Association Name="FK_UserMaster_UserMaster">
-          <End Type="NewspaperModel.UserMaster" Role="UserMaster" Multiplicity="1" />
-          <End Type="NewspaperModel.UserMaster" Role="UserMaster1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="UserMaster">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="UserMaster1">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -407,6 +379,36 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
           <Property Name="EmailId" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Feedback1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EmailId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StreetName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserSalt" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserMaster1" Relationship="NewspaperModel.FK_UserMaster_UserMaster" FromRole="UserMaster" ToRole="UserMaster1" />
+          <NavigationProperty Name="UserMaster2" Relationship="NewspaperModel.FK_UserMaster_UserMaster" FromRole="UserMaster1" ToRole="UserMaster" />
+        </EntityType>
+        <Association Name="FK_UserMaster_UserMaster">
+          <End Type="NewspaperModel.UserMaster" Role="UserMaster" Multiplicity="1" />
+          <End Type="NewspaperModel.UserMaster" Role="UserMaster1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserMaster1">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -466,22 +468,6 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
                 <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserMasters">
-            <EntityTypeMapping TypeName="NewspaperModel.UserMaster">
-              <MappingFragment StoreEntitySet="UserMaster">
-                <ScalarProperty Name="LastEditedDateTime" ColumnName="LastEditedDateTime" />
-                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
-                <ScalarProperty Name="UserSalt" ColumnName="UserSalt" />
-                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -555,6 +541,23 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
                 <ScalarProperty Name="EmailId" ColumnName="EmailId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="FeedbackId" ColumnName="FeedbackId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="NewspaperModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMaster">
+                <ScalarProperty Name="LastEditedDateTime" ColumnName="LastEditedDateTime" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="UserSalt" ColumnName="UserSalt" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -29,11 +29,11 @@ namespace OnlineNewspaperDistribution.Models
         public virtual DbSet<UserTypeMaster> UserTypeMasters { get; set; }
         public virtual DbSet<NewspaperMaster> NewspaperMasters { get; set; }
         public virtual DbSet<SubscriptionDetail> SubscriptionDetails { get; set; }
-        public virtual DbSet<UserMaster> UserMasters { get; set; }
         public virtual DbSet<Subscribed> Subscribeds { get; set; }
         public virtual DbSet<UseDetail> UseDetails { get; set; }
         public virtual DbSet<BillMaster> BillMasters { get; set; }
         public virtual DbSet<BillDetail> BillDetails { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
+        public virtual DbSet<UserMaster> UserMasters { get; set; }
     }
 }
