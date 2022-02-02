@@ -1,10 +1,10 @@
-﻿@model IEnumerable<OnlineNewspaperDistribution.Models.NewspaperMaster>
+﻿@model IEnumerable<OnlineNewspaperDistribution.Models.BillDetail>
 
 @{
-    ViewBag.Title = "Newspaper";
+    ViewBag.Title = "Bill Details";
 }
 
-<h2>Newspaper</h2>
+<h2>Bill Details</h2>
 
 @*<p>
     @Html.ActionLink("Create New", "Create")
@@ -12,19 +12,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NewspaperName)
+            @Html.DisplayNameFor(model => model.BillId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsActive)
+            @Html.DisplayNameFor(model => model.CustomerId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.NewspaperId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.VendorId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MonthlyPrice)
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.CreatedBy)
@@ -34,8 +34,8 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LastEditedBy)
-        </th>*@
-        @*<th>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.LastEditedDateTime)
         </th>*@
         <th></th>
@@ -44,19 +44,19 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.NewspaperName)
+            @Html.DisplayFor(modelItem => item.BillId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
+            @Html.DisplayFor(modelItem => item.CustomerId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Price)
+            @Html.DisplayFor(modelItem => item.NewspaperId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.VendorId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MonthlyPrice)
         </td>
         @*<td>
             @Html.DisplayFor(modelItem => item.CreatedBy)
@@ -70,11 +70,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.LastEditedDateTime)
         </td>*@
-        <td>
-            
-            @Html.ActionLink("Details", "Details", new { id=item.NewspaperId }) |
-            @Html.ActionLink("Subscribe", "Subscribe", new { id=item.NewspaperId })
-        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BillDetailsId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BillDetailsId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BillDetailsId })
+        </td>*@
     </tr>
 }
 

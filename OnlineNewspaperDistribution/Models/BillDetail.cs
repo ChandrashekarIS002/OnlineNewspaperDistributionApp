@@ -15,11 +15,11 @@ namespace OnlineNewspaperDistribution.Models
     public partial class BillDetail
     {
         public int BillDetailsId { get; set; }
-        public int BillId { get; set; }
+        public Nullable<int> BillId { get; set; }
+        public int CustomerId { get; set; }
         public int NewspaperId { get; set; }
-        public decimal Qty { get; set; }
-        public decimal Rate { get; set; }
         public decimal Amount { get; set; }
+        public int VendorId { get; set; }
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public int LastEditedBy { get; set; }

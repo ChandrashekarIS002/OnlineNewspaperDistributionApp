@@ -1,0 +1,33 @@
+﻿@model OnlineNewspaperDistribution.ViewModels.FeedbackViewModel
+@{
+    ViewBag.Title = "Feedback";
+}
+
+<h2>Feedback</h2>
+
+@using (Html.BeginForm("GiveFeedback", "Feedbacks", FormMethod.Post, new { }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, null, new { @class = "alert-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName)
+        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.UserName, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EmailId)
+        @Html.TextBoxFor(model => model.EmailId, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.EmailId, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Feedback1)
+        @Html.TextBoxFor(model => model.Feedback1, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Feedback1, null, new { @class = "text-danger" })
+    </div>
+
+    <input type="submit" value="Submit" name="GiveFeedback" class="btn btn-primary" />
+}
+
+

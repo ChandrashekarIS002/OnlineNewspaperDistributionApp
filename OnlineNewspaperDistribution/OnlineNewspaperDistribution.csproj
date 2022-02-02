@@ -133,6 +133,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BillMastersController.cs" />
+    <Compile Include="Controllers\FeedbacksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewspaperMastersController.cs" />
     <Compile Include="Controllers\SubscribedsController.cs" />
@@ -146,6 +148,9 @@
       <DependentUpon>UserMasterModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BillMaster.cs">
+      <DependentUpon>UserMasterModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Feedback.cs">
       <DependentUpon>UserMasterModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NewspaperMaster.cs">
@@ -185,6 +190,7 @@
       <DependentUpon>UserMasterModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\UserLoginViewModel.cs" />
   </ItemGroup>
@@ -292,6 +298,27 @@
     <Content Include="Views\UnSubscribe\Details.cshtml" />
     <Content Include="Views\UnSubscribe\Edit.cshtml" />
     <Content Include="Views\UnSubscribe\Index.cshtml" />
+    <Content Include="Views\BillDetails\Create.cshtml" />
+    <Content Include="Views\BillDetails\Delete.cshtml" />
+    <Content Include="Views\BillDetails\Details.cshtml" />
+    <Content Include="Views\BillDetails\Edit.cshtml" />
+    <Content Include="Views\BillDetails\Index.cshtml" />
+    <Content Include="Views\BillMasters\Create.cshtml" />
+    <Content Include="Views\BillMasters\Delete.cshtml" />
+    <Content Include="Views\BillMasters\Details.cshtml" />
+    <Content Include="Views\BillMasters\Edit.cshtml" />
+    <Content Include="Views\BillMasters\Index.cshtml" />
+    <Content Include="Views\BillMasters\Bill.cshtml" />
+    <Content Include="Views\BillMasters\IndexBill.cshtml" />
+    <Content Include="Views\BillMasters\IndexVendor.cshtml" />
+    <Content Include="Views\BillMasters\IndexCustomer.cshtml" />
+    <Content Include="Views\BillMasters\BillDetails.cshtml" />
+    <Content Include="Views\Feedbacks\Create.cshtml" />
+    <Content Include="Views\Feedbacks\Delete.cshtml" />
+    <Content Include="Views\Feedbacks\Details.cshtml" />
+    <Content Include="Views\Feedbacks\Edit.cshtml" />
+    <Content Include="Views\Feedbacks\Index.cshtml" />
+    <Content Include="Views\Feedbacks\GiveFeedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

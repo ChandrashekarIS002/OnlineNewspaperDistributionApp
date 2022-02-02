@@ -5,8 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="39b4778fcfae40cbaaed706adf77566f" Name="Diagram1">
-        <EntityTypeShape EntityType="NewspaperModel.BillDetail" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="NewspaperModel.BillMaster" Width="1.5" PointX="2.75" PointY="4.75" />
         <EntityTypeShape EntityType="NewspaperModel.StreetMaster" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="NewspaperModel.UserTypeMaster" Width="1.5" PointX="8.5" PointY="7.125" />
         <EntityTypeShape EntityType="NewspaperModel.NewspaperMaster" Width="1.5" PointX="0.75" PointY="8.75" />
@@ -17,6 +15,9 @@
         <EntityTypeShape EntityType="NewspaperModel.Subscribed" Width="1.5" PointX="7.375" PointY="10.75" />
         <AssociationConnector Association="NewspaperModel.FK_Subscribed_Subscribed" />
         <EntityTypeShape EntityType="NewspaperModel.UseDetail" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="NewspaperModel.BillMaster" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="NewspaperModel.BillDetail" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NewspaperModel.Feedback" Width="1.5" PointX="7.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

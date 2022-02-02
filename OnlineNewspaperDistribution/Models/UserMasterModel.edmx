@@ -10,11 +10,11 @@
             <PropertyRef Name="BillDetailsId" />
           </Key>
           <Property Name="BillDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BillId" Type="int" Nullable="false" />
+          <Property Name="BillId" Type="int" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="NewspaperId" Type="int" Nullable="false" />
-          <Property Name="Qty" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Rate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="LastEditedBy" Type="int" Nullable="false" />
@@ -24,13 +24,22 @@
           <Key>
             <PropertyRef Name="BillId" />
           </Key>
-          <Property Name="BillId" Type="int" Nullable="false" />
+          <Property Name="BillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="TotalAmount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDateTime" Type="datetime" />
-          <Property Name="LastEditedBy" Type="int" Nullable="false" />
+          <Property Name="LastEditedBy" Type="int" />
           <Property Name="LastEditedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="FeedbackId" />
+          </Key>
+          <Property Name="FeedbackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Feedback" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="NewspaperMaster">
           <Key>
@@ -63,7 +72,7 @@
             <PropertyRef Name="SubscriptionId" />
           </Key>
           <Property Name="SubscriptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" />
+          <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="NewspaperId" Type="int" Nullable="false" />
           <Property Name="NewspaperName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
@@ -164,6 +173,7 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
         <EntityContainer Name="NewspaperModelStoreContainer">
           <EntitySet Name="BillDetails" EntityType="Self.BillDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BillMaster" EntityType="Self.BillMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewspaperMaster" EntityType="Self.NewspaperMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StreetMaster" EntityType="Self.StreetMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subscribed" EntityType="Self.Subscribed" Schema="dbo" store:Type="Tables" />
@@ -197,8 +207,6 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
     <edmx:ConceptualModels>
       <Schema Namespace="NewspaperModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="NewspaperEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BillDetails" EntityType="NewspaperModel.BillDetail" />
-          <EntitySet Name="BillMasters" EntityType="NewspaperModel.BillMaster" />
           <EntitySet Name="StreetMasters" EntityType="NewspaperModel.StreetMaster" />
           <EntitySet Name="UserTypeMasters" EntityType="NewspaperModel.UserTypeMaster" />
           <EntitySet Name="NewspaperMasters" EntityType="NewspaperModel.NewspaperMaster" />
@@ -218,34 +226,10 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
             <End Role="Subscribed1" EntitySet="Subscribeds" />
           </AssociationSet>
           <EntitySet Name="UseDetails" EntityType="NewspaperModel.UseDetail" />
+          <EntitySet Name="BillMasters" EntityType="NewspaperModel.BillMaster" />
+          <EntitySet Name="BillDetails" EntityType="NewspaperModel.BillDetail" />
+          <EntitySet Name="Feedbacks" EntityType="NewspaperModel.Feedback" />
         </EntityContainer>
-        <EntityType Name="BillDetail">
-          <Key>
-            <PropertyRef Name="BillDetailsId" />
-          </Key>
-          <Property Name="BillDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BillId" Type="Int32" Nullable="false" />
-          <Property Name="NewspaperId" Type="Int32" Nullable="false" />
-          <Property Name="Qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="BillMaster">
-          <Key>
-            <PropertyRef Name="BillId" />
-          </Key>
-          <Property Name="BillId" Type="Int32" Nullable="false" />
-          <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="StreetMaster">
           <Key>
             <PropertyRef Name="StreetId" />
@@ -346,7 +330,7 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
             <PropertyRef Name="SubscriptionId" />
           </Key>
           <Property Name="SubscriptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="NewspaperId" Type="Int32" Nullable="false" />
           <Property Name="NewspaperName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
@@ -387,41 +371,48 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
           <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
           <Property Name="LastEditedDateTIme" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="BillMaster">
+          <Key>
+            <PropertyRef Name="BillId" />
+          </Key>
+          <Property Name="BillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" />
+          <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="BillDetail">
+          <Key>
+            <PropertyRef Name="BillDetailsId" />
+          </Key>
+          <Property Name="BillDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BillId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="NewspaperId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastEditedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="FeedbackId" />
+          </Key>
+          <Property Name="FeedbackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EmailId" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Feedback1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="NewspaperModelStoreContainer" CdmEntityContainer="NewspaperEntities1">
-          <EntitySetMapping Name="BillDetails">
-            <EntityTypeMapping TypeName="NewspaperModel.BillDetail">
-              <MappingFragment StoreEntitySet="BillDetails">
-                <ScalarProperty Name="LastEditedDateTime" ColumnName="LastEditedDateTime" />
-                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
-                <ScalarProperty Name="BillId" ColumnName="BillId" />
-                <ScalarProperty Name="BillDetailsId" ColumnName="BillDetailsId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BillMasters">
-            <EntityTypeMapping TypeName="NewspaperModel.BillMaster">
-              <MappingFragment StoreEntitySet="BillMaster">
-                <ScalarProperty Name="LastEditedDateTime" ColumnName="LastEditedDateTime" />
-                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="BillId" ColumnName="BillId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="StreetMasters">
             <EntityTypeMapping TypeName="NewspaperModel.StreetMaster">
               <MappingFragment StoreEntitySet="StreetMaster">
@@ -525,6 +516,45 @@ warning 6002: The table/view 'Newspaper.dbo.SubscriptionDetails' does not have a
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserDetailsId" ColumnName="UserDetailsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BillMasters">
+            <EntityTypeMapping TypeName="NewspaperModel.BillMaster">
+              <MappingFragment StoreEntitySet="BillMaster">
+                <ScalarProperty Name="LastEditedDateTime" ColumnName="LastEditedDateTime" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="BillId" ColumnName="BillId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BillDetails">
+            <EntityTypeMapping TypeName="NewspaperModel.BillDetail">
+              <MappingFragment StoreEntitySet="BillDetails">
+                <ScalarProperty Name="LastEditedDateTime" ColumnName="LastEditedDateTime" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="NewspaperId" ColumnName="NewspaperId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="BillId" ColumnName="BillId" />
+                <ScalarProperty Name="BillDetailsId" ColumnName="BillDetailsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="NewspaperModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="Feedback1" ColumnName="Feedback" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FeedbackId" ColumnName="FeedbackId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

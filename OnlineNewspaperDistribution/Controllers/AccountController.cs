@@ -222,23 +222,23 @@ namespace OnlineNewspaperDistribution.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult AdminBillGeneration()
-        {
-            return View();
-        }
+        //public ActionResult AdminBillGeneration()
+        //{
+        //    return View();
+        //}
 
       
 
-        public ActionResult CustomerFeedback()
-        {
-            return View();
-        }
+        //public ActionResult CustomerFeedback()
+        //{
+        //    return View();
+        //}
 
         //vendor menus
 
-        public ActionResult VendorViewBill()
-        {
-            return View();
-        }
+        //public ActionResult VendorViewBill()
+        //{
+        //    return View();
+        //}
     }
 }

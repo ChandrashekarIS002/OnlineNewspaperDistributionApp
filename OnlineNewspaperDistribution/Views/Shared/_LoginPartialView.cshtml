@@ -1,41 +1,43 @@
 ﻿@if (User.Identity.IsAuthenticated)
 {
 
-    <ul class="nav navbar-nav navbar-right">
-        @if (Session["LoggedUserTypeName"] != null)
+<ul class="nav navbar-nav navbar-right">
+    @if (Session["LoggedUserTypeName"] != null)
+    {
+        if (Session["LoggedUserTypeName"].ToString() == "Admin")
         {
-            if (Session["LoggedUserTypeName"].ToString() == "Admin")
-            {
-                <li>@Html.ActionLink("Manage Admin User", "RegisterAsAdmin", "Account")</li>
-                @*<li>@Html.ActionLink("Add New Vendor", "AdminAddVendor", "Account")</li>*@
+            <li>@Html.ActionLink("Manage Admin User", "RegisterAsAdmin", "Account")</li>
+            @*<li>@Html.ActionLink("Add New Vendor", "AdminAddVendor", "Account")</li>*@
 
-                <li>@Html.ActionLink("Manage Vendor", "Index", "UserMastersVendor")</li>
-                <li>@Html.ActionLink("Newspaper", "Index", "NewspaperMasters")</li>
-                <li>@Html.ActionLink("Bill Generation", "AdminBillGeneration", "Account")</li>
-                @*<li>@Html.ActionLink("Admin LoggedIn", "Logout", "Account")</li>*@
+            <li>@Html.ActionLink("Manage Vendor", "Index", "UserMastersVendor")</li>
+            <li>@Html.ActionLink("Newspaper", "Index", "NewspaperMasters")</li>
+            <li>@Html.ActionLink("Bill Generation", "Bill", "BillMasters")</li>
+            @*<li>@Html.ActionLink("Admin LoggedIn", "Logout", "Account")</li>*@
 
-            }
-            if (Session["LoggedUserTypeName"].ToString() == "Vendor")
-            {
-                @*<li>@Html.ActionLink("Add Delevery Boy", "VendorAddDeleveryBoy", "Account")</li>*@
-                <li>@Html.ActionLink("Manage Delevery Boy", "IndexViewDeleveryBoy", "UserMastersDeleveryBoy")</li>
-                <li>@Html.ActionLink("Subscribed Customer", "Index", "Subscribeds")</li>
-                <li>@Html.ActionLink("View Bill", "VendorViewBill", "Account")</li>
-                @*<li>@Html.ActionLink("Vendor LoggedIn", "Logout", "Account")</li>*@
-            }
-            if (Session["LoggedUserTypeName"].ToString() == "Customer")
-            {
-                <li>@Html.ActionLink("Newspaper", "IndexCustomer", "NewspaperMasters")</li>
-                <li>@Html.ActionLink("Manage Subscription", "Index", "UnSubscribe")</li>
-                <li>@Html.ActionLink("Feedback", "CustomerFeedback", "Account")</li>
-                @*<li>@Html.ActionLink("Customer LoggedIn", "Logout", "Account")</li>*@
-            }
         }
+        if (Session["LoggedUserTypeName"].ToString() == "Vendor")
+        {
+            @*<li>@Html.ActionLink("Add Delevery Boy", "VendorAddDeleveryBoy", "Account")</li>*@
+            <li>@Html.ActionLink("Manage Delevery Boy", "IndexViewDeleveryBoy", "UserMastersDeleveryBoy")</li>
+            <li>@Html.ActionLink("Subscribed Customer", "Index", "Subscribeds")</li>
+            <li>@Html.ActionLink("View Bill", "IndexVendor", "BillMasters")</li>
+            @*<li>@Html.ActionLink("Vendor LoggedIn", "Logout", "Account")</li>*@
+        }
+        if (Session["LoggedUserTypeName"].ToString() == "Customer")
+        {
+            <li>@Html.ActionLink("Newspaper", "IndexCustomer", "NewspaperMasters")</li>
+            <li>@Html.ActionLink("Manage Subscription", "Index", "UnSubscribe")</li>
+            <li>@Html.ActionLink("View Bill", "IndexCustomer", "BillMasters")</li>
 
-        <li>@Html.ActionLink(@User.Identity.Name, "", "")</li>
-        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+            <li>@Html.ActionLink("Feedback", "GiveFeedback", "Feedbacks")</li>
+            @*<li>@Html.ActionLink("Customer LoggedIn", "Logout", "Account")</li>*@
+        }
+    }
 
-    </ul>
+    <li>@Html.ActionLink(@User.Identity.Name, "", "")</li>
+    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+
+</ul>
 }
 else
 {

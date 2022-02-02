@@ -17,9 +17,9 @@ namespace OnlineNewspaperDistribution.Models
         public int BillId { get; set; }
         public int CustomerId { get; set; }
         public decimal TotalAmount { get; set; }
-        public int CreatedBy { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
-        public int LastEditedBy { get; set; }
+        public Nullable<int> LastEditedBy { get; set; }
         public Nullable<System.DateTime> LastEditedDateTime { get; set; }
     }
 }
