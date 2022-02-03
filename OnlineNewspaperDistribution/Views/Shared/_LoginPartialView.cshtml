@@ -11,14 +11,14 @@
 
             <li>@Html.ActionLink("Manage Vendor", "Index", "UserMastersVendor")</li>
             <li>@Html.ActionLink("Newspaper", "Index", "NewspaperMasters")</li>
-            <li>@Html.ActionLink("Bill Generation", "Bill", "BillMasters")</li>
+            <li>@Html.ActionLink("Bill Generation", "IndexBill", "BillMasters")</li>
             @*<li>@Html.ActionLink("Admin LoggedIn", "Logout", "Account")</li>*@
 
         }
         if (Session["LoggedUserTypeName"].ToString() == "Vendor")
         {
             @*<li>@Html.ActionLink("Add Delevery Boy", "VendorAddDeleveryBoy", "Account")</li>*@
-            <li>@Html.ActionLink("Manage Delevery Boy", "IndexViewDeleveryBoy", "UserMastersDeleveryBoy")</li>
+            <li>@Html.ActionLink("Manage Delevery Boy", "IndexViewDelevseryBoy", "UserMastersDeleveryBoy")</li>
             <li>@Html.ActionLink("Subscribed Customer", "Index", "Subscribeds")</li>
             <li>@Html.ActionLink("View Bill", "IndexVendor", "BillMasters")</li>
             @*<li>@Html.ActionLink("Vendor LoggedIn", "Logout", "Account")</li>*@

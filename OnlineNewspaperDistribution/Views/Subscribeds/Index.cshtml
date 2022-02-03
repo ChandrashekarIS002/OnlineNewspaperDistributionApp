@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<OnlineNewspaperDistribution.Models.Subscribed>
 
 @{
-    ViewBag.Title = "Subscribed Customer";
+    ViewBag.Title = "Subscribed Customers";
 }
 
-<h2>Subscribed Customer</h2>
+<h2>Subscribed Customers</h2>
 
 @*<p>
     @Html.ActionLink("Create New", "Create")
@@ -14,21 +14,21 @@
         <th>
             @Html.DisplayNameFor(model => model.UserId)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.NewspaperId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.NewspaperName)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.VendorId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.MonthlyPrice)
         </th>
@@ -52,21 +52,21 @@
         <td>
             @Html.DisplayFor(modelItem => item.UserId)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.NewspaperId)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.NewspaperName)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
+        </td>*@
+        @*<td>
             @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
+        </td>*@
+        @*<td>
             @Html.DisplayFor(modelItem => item.VendorId)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.MonthlyPrice)
         </td>

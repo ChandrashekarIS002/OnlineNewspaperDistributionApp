@@ -1,10 +1,10 @@
-﻿@model IEnumerable<OnlineNewspaperDistribution.Models.BillDetail>
+﻿@model IEnumerable<OnlineNewspaperDistribution.Models.Subscribed>
 
 @{
-    ViewBag.Title = "Bill Details";
+    ViewBag.Title = "View Bill";
 }
 
-<h2>Bill Details</h2>
+<h2>View Bill</h2>
 
 @*<p>
     @Html.ActionLink("Create New", "Create")
@@ -12,31 +12,37 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.BillId)
+            @Html.DisplayNameFor(model => model.UserId)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustomerId)
-        </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.NewspaperId)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.NewspaperName)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.IsActive)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Amount)
+            @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.VendorId)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.MonthlyPrice)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
+            @Html.DisplayNameFor(model => model.StreetId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedDateTime)
+            @Html.DisplayNameFor(model => model.DeleveryBoyId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastEditedBy)
+            @Html.DisplayNameFor(model => model.Subscribed1.NewspaperName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastEditedDateTime)
+            @Html.DisplayNameFor(model => model.Subscribed2.NewspaperName)
         </th>*@
         <th></th>
     </tr>
@@ -44,36 +50,42 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.BillId)
+            @Html.DisplayFor(modelItem => item.UserId)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerId)
-        </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.NewspaperId)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.NewspaperName)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.IsActive)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Amount)
+            @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.VendorId)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.MonthlyPrice)
         </td>
         @*<td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
+            @Html.DisplayFor(modelItem => item.StreetId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedDateTime)
+            @Html.DisplayFor(modelItem => item.DeleveryBoyId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LastEditedBy)
+            @Html.DisplayFor(modelItem => item.Subscribed1.NewspaperName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LastEditedDateTime)
+            @Html.DisplayFor(modelItem => item.Subscribed2.NewspaperName)
         </td>*@
         @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BillDetailsId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BillDetailsId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BillDetailsId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.SubscriptionId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SubscriptionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SubscriptionId })
         </td>*@
     </tr>
 }

@@ -6,9 +6,9 @@
 
 <h2>Index</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
@@ -17,10 +17,10 @@
         <th>
             @Html.DisplayNameFor(model => model.TotalAmount)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.CreatedBy)
         </th>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.CreatedDateTime)
         </th>
         <th>
@@ -40,10 +40,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.TotalAmount)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.CreatedBy)
         </td>
-        @*<td>
+        <td>
             @Html.DisplayFor(modelItem => item.CreatedDateTime)
         </td>
         <td>
@@ -52,11 +52,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.LastEditedDateTime)
         </td>*@
-        <td>
+        @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.BillId }) |
             @Html.ActionLink("Details", "Details", new { id=item.BillId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.BillId })
-        </td>
+        </td>*@
     </tr>
 }
 

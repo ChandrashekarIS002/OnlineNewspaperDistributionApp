@@ -283,7 +283,6 @@
     <Content Include="Views\UserMastersDeleveryBoy\Details.cshtml" />
     <Content Include="Views\UserMastersDeleveryBoy\Edit.cshtml" />
     <Content Include="Views\UserMastersDeleveryBoy\Index.cshtml" />
-    <Content Include="Views\UserMastersDeleveryBoy\IndexViewDeleveryBoy.cshtml" />
     <Content Include="Views\Subscribeds\Create.cshtml" />
     <Content Include="Views\Subscribeds\Delete.cshtml" />
     <Content Include="Views\Subscribeds\Details.cshtml" />
@@ -319,6 +318,7 @@
     <Content Include="Views\Feedbacks\Edit.cshtml" />
     <Content Include="Views\Feedbacks\Index.cshtml" />
     <Content Include="Views\Feedbacks\GiveFeedback.cshtml" />
+    <Content Include="Views\UserMastersDeleveryBoy\IndexViewDelevseryBoy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

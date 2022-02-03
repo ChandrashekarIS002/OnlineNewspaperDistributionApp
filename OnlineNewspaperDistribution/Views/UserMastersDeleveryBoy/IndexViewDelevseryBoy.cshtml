@@ -1,0 +1,99 @@
+﻿@model IEnumerable<OnlineNewspaperDistribution.Models.UserMaster>
+
+@{
+    ViewBag.Title = "DeleveryBoy Details";
+}
+
+<h2>Manage DeleveryBoy</h2>
+
+<p>
+    @Html.ActionLink("Add Delevery Boy", "VendorAddDeleveryBoy", "Account")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StreetName)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.UserSalt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserTypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastEditedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastEditedDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserMaster1.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserMaster2.UserName)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StreetName)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.UserSalt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserTypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastEditedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastEditedDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserMaster1.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserMaster2.UserName)
+        </td>*@
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
+        </td>
+    </tr>
+}
+
+</table>

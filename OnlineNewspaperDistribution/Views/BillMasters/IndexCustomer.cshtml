@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<OnlineNewspaperDistribution.Models.BillMaster>
 
 @{
-    ViewBag.Title = "IndexCustomer";
+    ViewBag.Title = "Bill Details";
 }
 
-<h2>IndexCustomer</h2>
+<h2>Bill Details</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
@@ -52,11 +52,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.LastEditedDateTime)
         </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BillId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BillId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BillId })
-        </td>
+        <!--<td>-->
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.BillId }) |*@
+            
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.BillId })*@
+        <!--</td>-->
     </tr>
 }
 

@@ -11,21 +11,21 @@
 </p>*@
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.UserId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.NewspaperId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.NewspaperName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsActive)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Price)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.VendorId)
         </th>
@@ -49,21 +49,21 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.UserId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.NewspaperId)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.NewspaperName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsActive)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Price)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.VendorId)
         </td>

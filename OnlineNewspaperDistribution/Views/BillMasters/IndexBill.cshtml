@@ -7,7 +7,7 @@
 <h2>IndexBill</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Generate Bill", "Bill")
 </p>
 <table class="table">
     <tr>
@@ -82,9 +82,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Subscribed2.NewspaperName)
         </td>*@
-        <td>
+        @*<td>
             @Html.ActionLink("Generate Bill", "BillDetails", new { id=item.SubscriptionId }) 
-        </td>
+        </td>*@
     </tr>
 }
 

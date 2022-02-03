@@ -15,7 +15,7 @@ namespace OnlineNewspaperDistribution.Controllers
         private NewspaperEntities1 db = new NewspaperEntities1();
 
         // GET: UserMastersDeleveryBoy
-        public ActionResult IndexViewDeleveryBoy()
+        public ActionResult IndexViewDelevseryBoy()
         {
                 var loggedinId = (int)Session["LogginedInUserId"];
                 List<UserMaster> DeleveryBoylist = new List<UserMaster>();

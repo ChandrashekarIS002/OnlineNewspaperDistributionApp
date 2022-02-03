@@ -14,6 +14,11 @@ namespace OnlineNewspaperDistribution.Controllers
     {
         private NewspaperEntities1 db = new NewspaperEntities1();
 
+
+        public ActionResult Index()
+        {
+            return View(db.BillMasters.ToList());
+        }
         public ActionResult IndexBill()
         {
             List<Subscribed> mylist = new List<Subscribed>();
@@ -25,10 +30,14 @@ namespace OnlineNewspaperDistribution.Controllers
 
         public ActionResult IndexVendor()
         {
-            List<BillDetail> mylist = new List<BillDetail>();
+            //List<BillDetail> mylist = new List<BillDetail>();
+            //var loggedinId = (int)Session["LogginedInUserId"];
+            ////mylist = (from a1 in db.BillMasters join a2 in db.BillDetails on a1.BillId equals a2.BillId where loggedinId == a2.VendorId select a1).ToList();
+            //mylist = (from a in db.BillDetails where a.VendorId.Equals(loggedinId) select a).ToList();
+            //return View(mylist);
+            List<Subscribed> mylist = new List<Subscribed>();
             var loggedinId = (int)Session["LogginedInUserId"];
-            //mylist = (from a1 in db.BillMasters join a2 in db.BillDetails on a1.BillId equals a2.BillId where loggedinId == a2.VendorId select a1).ToList();
-            mylist = (from a in db.BillDetails where a.VendorId.Equals(loggedinId) select a).ToList();
+            mylist = (from a in db.Subscribeds where a.VendorId.Equals(loggedinId) select a).ToList();
             return View(mylist);
         }
 
@@ -48,6 +57,9 @@ namespace OnlineNewspaperDistribution.Controllers
           
             BillMaster ss = new BillMaster();
 
+            db1.Entry(ss).State = EntityState.Deleted;
+            db1.SaveChanges();
+
             var result = db1.Subscribeds.GroupBy(x => x.UserId)
               .Select(g => new {UserId = g.Key,TotalAmount = g.Sum(x => x.MonthlyPrice)}).ToList();
 
@@ -62,7 +74,7 @@ namespace OnlineNewspaperDistribution.Controllers
             }
             //return View();
             
-            return RedirectToAction("IndexBill", "BillMasters");
+            return RedirectToAction("Index", "BillMasters");
         }
 
         public ActionResult Details(int? id)
@@ -80,26 +92,19 @@ namespace OnlineNewspaperDistribution.Controllers
         }
 
         // GET: BillMasters/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
         // POST: BillMasters/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BillId,CustomerId,TotalAmount,CreatedBy,CreatedDateTime,LastEditedBy,LastEditedDateTime")] BillMaster billMaster)
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create()
         {
-            if (ModelState.IsValid)
-            {
-                db.BillMasters.Add(billMaster);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(billMaster);
+            return View();
         }
 
         // GET: BillMasters/Edit/5

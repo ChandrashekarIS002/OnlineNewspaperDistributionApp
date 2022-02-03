@@ -18,9 +18,13 @@ namespace OnlineNewspaperDistribution.Controllers
         public ActionResult Index()
         {
             var loggiedinId = (int)Session["LogginedInUserId"];
-            List<Subscribed> mylist = new List<Subscribed>();
-            mylist = (from s in db.Subscribeds where s.VendorId.Equals(loggiedinId) select s).ToList();
+            //List<Subscribed> mylist = new List<Subscribed>();
+            //var mylist = (from s in db.Subscribeds join a in db.UserMasters on s.UserId equals a.UserId where s.VendorId.Equals(loggiedinId) 
+            //              select new { a.UserName, s.NewspaperName, s.MonthlyPrice, a.StreetName, s.DeleveryBoyId }).ToList();
             //var subscribeds = db.Subscribeds.Include(s => s.Subscribed1).Include(s => s.Subscribed2);
+            var mylist = (from s in db.Subscribeds
+                          where s.VendorId.Equals(loggiedinId)
+                          select s).ToList();
             return View(mylist);
             //return View(db.Subscribeds.ToList());
         }
