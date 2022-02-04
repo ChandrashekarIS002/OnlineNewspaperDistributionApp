@@ -33,8 +33,9 @@ namespace OnlineNewspaperDistribution.Controllers
             objfeedback.UserName = objfeedbackmodel.UserName;
             objfeedback.EmailId = objfeedbackmodel.EmailId;
             objfeedback.Feedback1 = objfeedbackmodel.Feedback1;
+            db.Feedbacks.Add(objfeedback);
             db.SaveChanges();
-            return View(objfeedback);
+            return RedirectToAction("Index","FeedBacks");
             //return RedirectToAction("Index");
         }
 
@@ -140,6 +141,11 @@ namespace OnlineNewspaperDistribution.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult ViewFeedback()
+        {
+            return View(db.Feedbacks.ToList());
         }
     }
 }

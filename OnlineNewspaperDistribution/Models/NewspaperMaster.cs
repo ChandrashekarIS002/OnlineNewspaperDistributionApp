@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
 namespace OnlineNewspaperDistribution.Models
 {
     using System;
@@ -14,11 +15,22 @@ namespace OnlineNewspaperDistribution.Models
     
     public partial class NewspaperMaster
     {
+        [Display(Name = "Newspaper Id")]
         public int NewspaperId { get; set; }
+
+        [Display(Name = "Newspaper Name")]
         public string NewspaperName { get; set; }
+
+        [Display(Name = "Is Active")]
         public bool IsActive { get; set; }
+
+        [Display(Name = "Price")]
         public decimal Price { get; set; }
+
+        [Display(Name = "Vendor Id")]
         public Nullable<int> VendorId { get; set; }
+
+        [Display(Name = "Monthly Price")]
         public Nullable<decimal> MonthlyPrice { get; set; }
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }

@@ -11,14 +11,25 @@ namespace OnlineNewspaperDistribution.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class BillDetail
     {
         public int BillDetailsId { get; set; }
+
+        [Display(Name = "Bill Id")]
         public Nullable<int> BillId { get; set; }
+
+        [Display(Name = "Customer Id")]
         public int CustomerId { get; set; }
+
+        [Display(Name = "Newspaper Id")]
         public int NewspaperId { get; set; }
+
+        [Display(Name = "Amount")]
         public decimal Amount { get; set; }
+
+        [Display(Name = "Vendor Id")]
         public int VendorId { get; set; }
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }

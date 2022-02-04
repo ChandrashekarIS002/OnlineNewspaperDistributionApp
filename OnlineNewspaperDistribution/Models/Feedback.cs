@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
 namespace OnlineNewspaperDistribution.Models
 {
     using System;
@@ -17,6 +18,8 @@ namespace OnlineNewspaperDistribution.Models
         public int FeedbackId { get; set; }
         public string UserName { get; set; }
         public string EmailId { get; set; }
+
+        [Display(Name = "Feedbacks : ")]
         public string Feedback1 { get; set; }
     }
 }

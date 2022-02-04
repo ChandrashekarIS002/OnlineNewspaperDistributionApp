@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OnlineNewspaperDistribution.Models;
+using System.Runtime.Remoting.Contexts;
 
 namespace OnlineNewspaperDistribution.Controllers
 {
@@ -44,7 +45,7 @@ namespace OnlineNewspaperDistribution.Controllers
         public ActionResult IndexCustomer()
         {
             List<BillMaster> mylist = new List<BillMaster>();
-            var loggedinId = (int)Session["LogginedInUserId"];
+            var loggedinId = Convert.ToInt32(Session["LogginedInUserId"]);
             mylist = (from v in db.BillMasters where v.CustomerId==loggedinId select v).ToList();
             return View(mylist);
         }
@@ -57,8 +58,13 @@ namespace OnlineNewspaperDistribution.Controllers
           
             BillMaster ss = new BillMaster();
 
-            db1.Entry(ss).State = EntityState.Deleted;
+            List<BillMaster> mylist = new List<BillMaster>();
+            mylist = (from a in db1.BillMasters select a).ToList();
+            db1.BillMasters.RemoveRange(mylist);
             db1.SaveChanges();
+
+            //db1.Entry(ss).State = EntityState.Deleted;
+            //db1.SaveChanges();
 
             var result = db1.Subscribeds.GroupBy(x => x.UserId)
               .Select(g => new {UserId = g.Key,TotalAmount = g.Sum(x => x.MonthlyPrice)}).ToList();

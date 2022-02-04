@@ -23,7 +23,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Feedback1)
-        @Html.TextBoxFor(model => model.Feedback1, new { @class = "form-control" })
+        @Html.TextAreaFor(model => model.Feedback1, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Feedback1, null, new { @class = "text-danger" })
     </div>
 

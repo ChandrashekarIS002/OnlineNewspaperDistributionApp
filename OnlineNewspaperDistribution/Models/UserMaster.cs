@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
 namespace OnlineNewspaperDistribution.Models
 {
     using System;
@@ -14,9 +15,16 @@ namespace OnlineNewspaperDistribution.Models
     
     public partial class UserMaster
     {
+        [Display(Name = "User Id")]
         public int UserId { get; set; }
+
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
+
+        [Display(Name = "EmailId")]
         public string EmailId { get; set; }
+
+        [Display(Name = "Street Name")]
         public string StreetName { get; set; }
         public string UserSalt { get; set; }
         public int UserTypeId { get; set; }

@@ -11,11 +11,16 @@ namespace OnlineNewspaperDistribution.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class StreetMaster
     {
+        [Display(Name = "Street Id")]
         public int StreetId { get; set; }
+
+        [Display(Name = "Street Name")]
         public string StreetName { get; set; }
+
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public int LastEditedBy { get; set; }

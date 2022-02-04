@@ -319,6 +319,7 @@
     <Content Include="Views\Feedbacks\Index.cshtml" />
     <Content Include="Views\Feedbacks\GiveFeedback.cshtml" />
     <Content Include="Views\UserMastersDeleveryBoy\IndexViewDelevseryBoy.cshtml" />
+    <Content Include="Views\Feedbacks\ViewFeedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
